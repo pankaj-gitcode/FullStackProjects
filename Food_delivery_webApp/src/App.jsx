@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {RecoilRoot} from 'recoil'
+import './index.css'
 
 const Navbar = lazy(()=>import('./components/Navbar'));
 const Home = lazy(()=>import('./components/pages/Home/Home.jsx'))
@@ -13,7 +14,6 @@ export default function App(){
       <Suspense lading={<h5>Loading...</h5>}>
         <div className="m-auto w-[80%]">
           <Navbar/>
-
           <BrowserRouter>
             <Routes>
               <Route path='/' element={<Home/>} />
@@ -26,6 +26,7 @@ export default function App(){
         </div>
       </Suspense>
     </RecoilRoot>
+    
 
   </>
   )
