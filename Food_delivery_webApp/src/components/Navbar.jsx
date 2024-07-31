@@ -11,6 +11,7 @@ export default function Navbar(){
 
                 <img src={assets.foodflixlogo} alt="food" className="w-36 h-12 sm:text-lg lg:text-xl"/>
                 
+                {/* all menu/services navbar */}
                 <ul className="flex gap-4 items-center justify-between font-[ubuntu] text-[#49557e] text-[18px]">
                     {
                         menuItems.map((elem)=>
