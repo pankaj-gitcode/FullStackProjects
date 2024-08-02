@@ -2,23 +2,46 @@ import React from 'react'
 
 export default function Header(){
   return(<>
-      <div className="relative h-[80vh] mt-10 bg-[url('header_img.png')] bg-cover bg-center rounded-xl ">
+
+      <div className="h-[80vh] bg-[url('/header_img.png')] bg-cover bg-center flex flex-col items-center justify-center mt-9 rounded-xl bg-opacity-25 bg-[#fff]">
+
+          {/* <div className="absolute ml-12 text-[#fff] overflow-hidden  sm:right-10 md:right-20 lg:right-96 "> */}
+          <div className="ml-12 text-[#fff] overflow-hidden lg:pr-[42vw] sm:pr-[10vw] md:pr-[20vw] transition-[0.5s] animate-fadeIn">
+            <h1 className=" text-6xl font-semibold pl-2">Order your favourite food here</h1>
+
+            <p className="py-9 pl-2">Choose from a diverse menu featuring a delectable array of dishes crafted with the finest ingredients & culinary expertise. Our mission is to satisfy your cravings & elevate your dining experience, one delicious meal at a time</p>
+            <button className="border-2 text-[#000] bg-[#fff] rounded-full px-3 py-1 mb-6 active:scale-105 transition-[.3s] ml-2">View More</button>
+          </div>
+
+      </div>
+
     
-
-        <div className="absolute flex flex-col items-start justify-center gap-6 bottom-40 right-[36vw] left-[5vw] flex-wrap">
-
-          <h1 className="text-5xl lg:text-6xl font-semibold text-slate-50">Order your favourite food here</h1>
-          <p className="text-slate-50 text-lg sm:text-lg lg:text-[2vw] xl:text-[1vw]">Choose from a diverse menu featuring a delectable array of dishes crafted with the finest ingredients & culinary expertise. Our mission is to satisfy your cravings & elevate your dining experience, one delicious meal at a time</p>
-
-          <button className="text-[#000] text-2xl lg:text-lg sm:text-3xl border-2 bg-slate-50 px-6 py-2 rounded-full hover:scale-105 active:scale-90 transition-[0.1s]">View More</button>
-
-        </div>
-      </div> 
   </>)
 }
 
 
 
+
+
+
+
+
+
+
+{/* <div className="relative h-[80vh] mt-10 bg-[url('header_img.png')] bg-cover bg-center rounded-xl  flex flex-col items-center justify-center gap-6 ">
+    
+
+    <div className="   ">
+
+      <h1 className="text-5xl lg:text-6xl font-semibold text-slate-50">Order your favourite food here</h1>
+      <p className="text-slate-50 text-lg sm:text-lg lg:text-[2vw] xl:text-[1vw]">Choose from a diverse menu featuring a delectable array of dishes crafted with the finest ingredients & culinary expertise. Our mission is to satisfy your cravings & elevate your dining experience, one delicious meal at a time</p>
+
+      <button className="text-[#000] text-2xl lg:text-[90%] sm:text-3xl border-2 bg-slate-50 px-5 py-1 rounded-full active:scale-90 transition-[0.1s]">View More</button>
+
+    </div>
+  </div>  */}
+
+//  xl:bottom-8 right-[36vw] left-[5vw] overflow-hidden
 
 
 
