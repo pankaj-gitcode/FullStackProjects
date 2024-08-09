@@ -1,4 +1,15 @@
 
+@keyframes fadeIn{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 100;
+  }
+}
+.fade-in{
+  animation: fadeIn .9s ease-in-out;
+}
 
 
 

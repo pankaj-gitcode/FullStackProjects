@@ -6,3 +6,42 @@ export const menuAtom = atom({
     key: 'menuAtom',
     default: [{item: 'menu'}, {item: 'mobile-app'}, {item: 'contact-us'}, {item: 'home'}]
 })
+
+//ExploreMenu: list of menu
+export const menuItemsAtom = atom({
+    key: "menuItemsAtom",
+    default: [
+        {
+            menuImage: '/menuImages/menu_1.png',
+            menuImageName: 'Salad'
+        },
+        {
+            menuImage: '/menuImages/menu_2.png',
+            menuImageName: 'Rolls'
+        },
+        {
+            menuImage: '/menuImages/menu_3.png',
+            menuImageName: 'Deserts'
+        },
+        {
+            menuImage: '/menuImages/menu_4.png',
+            menuImageName: 'Sandwich'
+        },
+        {
+            menuImage: '/menuImages/menu_5.png',
+            menuImageName: 'Cake'
+        },
+        {
+            menuImage: '/menuImages/menu_6.png',
+            menuImageName: 'PureVeg'
+        },
+        {
+            menuImage: '/menuImages/menu_7.png',
+            menuImageName: 'Pasta'
+        },
+        {
+            menuImage: '/menuImages/menu_8.png',
+            menuImageName: 'Noodles'
+        }
+    ]
+})

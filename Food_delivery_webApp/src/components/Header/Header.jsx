@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../App.css'
 
 export default function Header(){
   return(<>
@@ -6,11 +7,12 @@ export default function Header(){
       <div className="h-[80vh] bg-[url('/header_img.png')] bg-cover bg-center flex flex-col items-center justify-center mt-9 rounded-xl bg-opacity-25 bg-[#fff]">
 
           {/* <div className="absolute ml-12 text-[#fff] overflow-hidden  sm:right-10 md:right-20 lg:right-96 "> */}
-          <div className="ml-12 text-[#fff] overflow-hidden lg:pr-[42vw] sm:pr-[10vw] md:pr-[20vw] transition-[0.5s] animate-fadeIn">
+          <div className="ml-12 text-[#fff] overflow-hidden lg:pr-[42vw] sm:pr-[10vw] md:pr-[20vw] transition-[0.5s] fade-in">
             <h1 className=" text-6xl font-semibold pl-2">Order your favourite food here</h1>
 
             <p className="py-9 pl-2">Choose from a diverse menu featuring a delectable array of dishes crafted with the finest ingredients & culinary expertise. Our mission is to satisfy your cravings & elevate your dining experience, one delicious meal at a time</p>
-            <button className="border-2 text-[#000] bg-[#fff] rounded-full px-3 py-1 mb-6 active:scale-105 transition-[.3s] ml-2">View More</button>
+
+            <button className="border-2 text-[#000] bg-[#fff] rounded-full px-3 py-1 mb-6 active:scale-105 transition-[.3s] ml-2 active:bg-[#E85F22] active:border-slate-50 active:text-slate-100">View More</button>
           </div>
 
       </div>
