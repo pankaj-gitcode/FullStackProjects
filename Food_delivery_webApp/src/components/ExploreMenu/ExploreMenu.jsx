@@ -1,11 +1,14 @@
 import React from 'react'
 import { menu_list } from '../../assets/assets'
 import { useRecoilValue } from 'recoil'
-import { menuItemsAtom } from '../atom'
+import { foodItemsAtom, menuItemsAtom } from '../atom'
 
 export default function ExploreMenu(){
     const menuItems = useRecoilValue(menuItemsAtom);
+    const foodItems = useRecoilValue(foodItemsAtom);
+    console.log(foodItems(), "HELLO");
     return(<>
+    <p>HERE {foodItems}</p>
         <div className="py-10">
             <h1 className="text-6xl sm:text-6xl md:text-5xl xl:text-6xl font-semibold ">Explore our menu</h1>
             <div className="w-[60%] pt-5 pb-7">

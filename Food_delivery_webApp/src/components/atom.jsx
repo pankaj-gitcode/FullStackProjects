@@ -1,4 +1,6 @@
-import { atom } from "recoil";
+import { atom, atomFamily, selectorFamily } from "recoil";
+import { food_list } from "../assets/assets";
+
 
 
 // NavBar: menu list items
@@ -45,3 +47,13 @@ export const menuItemsAtom = atom({
         }
     ]
 })
+
+export const foodItemsAtom = selectorFamily({
+    key: 'foodItemsAtom',
+    get: ()=>({get})=>{
+        console.log(get);
+        return food_list.map(elem=>console.log(elem))
+    }
+})
+
+console.log(foodItemsAtom())
