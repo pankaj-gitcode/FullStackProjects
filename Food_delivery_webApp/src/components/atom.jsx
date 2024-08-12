@@ -1,5 +1,5 @@
 import { atom, atomFamily, selectorFamily } from "recoil";
-import { food_list } from "../assets/assets";
+import { assets, food_list } from "../assets/assets";
 
 
 
@@ -54,4 +54,9 @@ export const foodItemsAtom = selectorFamily({
         // console.log("THIS IS GET: ",get);
         return food_list.map(elem=>elem)
     }
+})
+
+export const ratingsAtom = atom({
+    key: 'ratingsAtom',
+    default: assets.rating_stars
 })

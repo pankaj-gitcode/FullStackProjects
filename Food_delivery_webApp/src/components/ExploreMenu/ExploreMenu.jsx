@@ -5,12 +5,9 @@ import { foodItemsAtom, menuItemsAtom } from '../atom'
 
 export default function ExploreMenu(){
     const menuItems = useRecoilValue(menuItemsAtom);
-    const foodItems = useRecoilValue(foodItemsAtom());
-    console.log("HELLO",typeof foodItems);
+    
     return(<>
-    {
-        foodItems.map((elem,index)=><p key={index}>HELLO: {elem.description}</p>)
-    }
+    
     
         <div className="py-10">
             <h1 className="text-6xl sm:text-6xl md:text-5xl xl:text-6xl font-semibold ">Explore our menu</h1>
