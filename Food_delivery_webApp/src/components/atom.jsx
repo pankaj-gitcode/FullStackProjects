@@ -51,9 +51,7 @@ export const menuItemsAtom = atom({
 export const foodItemsAtom = selectorFamily({
     key: 'foodItemsAtom',
     get: ()=>({get})=>{
-        console.log(get);
-        return food_list.map(elem=>console.log(elem))
+        // console.log("THIS IS GET: ",get);
+        return food_list.map(elem=>elem)
     }
 })
-
-console.log(foodItemsAtom())
