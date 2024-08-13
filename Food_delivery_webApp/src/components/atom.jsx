@@ -3,6 +3,7 @@ import { assets, food_list } from "../assets/assets";
 
 
 
+
 // NavBar: menu list items
 export const menuAtom = atom({
     key: 'menuAtom',
@@ -48,6 +49,7 @@ export const menuItemsAtom = atom({
     ]
 })
 
+//  --------- foodItem:img,name,description,price -------
 export const foodItemsAtom = selectorFamily({
     key: 'foodItemsAtom',
     get: ()=>({get})=>{
@@ -56,7 +58,17 @@ export const foodItemsAtom = selectorFamily({
     }
 })
 
+// -------- Ratings ------
 export const ratingsAtom = atom({
     key: 'ratingsAtom',
     default: assets.rating_stars
 })
+
+// ------- add/remove icons -------
+export const addRemoveIconsAtom = atom({
+    key: 'addRemoveIconsAtom',
+    default: [
+        {iconeWhite: assets.add_icon_white}, 
+        {iconeGreen: assets.add_icon_green},
+        {iconeRed: assets.remove_icon_red}]
+}) 
