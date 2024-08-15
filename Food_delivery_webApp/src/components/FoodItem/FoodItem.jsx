@@ -9,18 +9,21 @@ export default function FoodItem(){
     const addRemoveIcons = useRecoilValue(addRemoveIconsAtom);
 
     // ------------- when +icon clicked ---------------
+  
     const clickHandleAdd = (id)=>{
         setCount({
-            //spread the previous count object
-            ...count, [id]:(count[id] || 0) +1  //increase the count for specific item
+            ...count,[id]:(count[id] || 0 )+ 1
         })
+        console.log("count[id]: ", count[id], id, count);
     }
     // ------------- when -icon clicked ---------------
     const clickHandleSub = (id)=>{
-        setCount({
-            //spread the previous count Object
-            ...count,[id]:(count[id] || 0) - 1
-        })
+        setCount(
+            {
+                //spread the previous count Object
+                ...count,[id]:Math.max((count[id] || 0 )-1,0)
+            }
+        )
     }
    
     return(<>
@@ -51,27 +54,27 @@ export default function FoodItem(){
                                 <h1 className="text-[#E85F22] text-lg font-semibold">₹{elem.price*84/2}</h1>
                                 <div>
                                     {
-                                        (!count)? 
+                                        (count[elem._id] === 0 || count[elem._id] === undefined)? 
                                         <img 
                                         src={addRemoveIcons[0].iconeWhite} 
                                         alt={addRemoveIcons[0].iconeWhite}
-                                         
-                                        onClick={()=>clickHandleAdd(index)} />:
+                                        onClick={()=>clickHandleAdd(elem._id)}
+                                         />:
                                         <div>
                                             <img 
                                             src={addRemoveIcons[1].iconeGreen} 
                                             alt={addRemoveIcons[1].iconeGreen}
                                              
-                                            onClick={()=>clickHandleAdd(index)} />
+                                            onClick={()=>clickHandleAdd(elem._id)} />
 
-                                            <p>{count[index]}</p>
+                                            <p>{count[elem._id]}</p>
 
                                             <img src={addRemoveIcons[2].iconeRed} 
                                             alt={addRemoveIcons[2].iconeRed} 
                                             
-                                            onClick={()=>clickHandleSub(index)} />
+                                            onClick={()=>clickHandleSub(elem._id)} />
 
-                                            {console.log("count", count)}
+                                            {console.log("count:", count, "index: ",index)}
                                         </div>
                                     }
                                 </div>
@@ -82,6 +85,5 @@ export default function FoodItem(){
                     )
                 })
             }
-        
     </>)
 }
