@@ -36,7 +36,7 @@ export const menuItemsAtom = atom({
         },
         {
             menuImage: '/menuImages/menu_6.png',
-            menuImageName: 'PureVeg'
+            menuImageName: 'Pure Veg'
         },
         {
             menuImage: '/menuImages/menu_7.png',
@@ -49,15 +49,11 @@ export const menuItemsAtom = atom({
     ]
 })
 
-
-
-//food_list
-export const foodListAtom = selectorFamily({
-    key: 'foodListAtom',
-    get: ()=>({get})=>{
-        return food_list.map(elem=>elem)
-    }
-})
+//select category 
+export const categoryAtom = atom({
+    key: 'categoryAtom',
+    default: 'All'
+}) 
 
 
 //  --------- foodItem:img,name,description,price -------
