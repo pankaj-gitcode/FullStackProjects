@@ -1,7 +1,7 @@
 import React from 'react'
 import { menu_list } from '../../assets/assets'
 import { useRecoilValue } from 'recoil'
-import { foodItemsAtom, menuItemsAtom } from '../atom'
+import {  menuItemsAtom } from '../atom'
 
 export default function ExploreMenu(){
     const menuItems = useRecoilValue(menuItemsAtom);

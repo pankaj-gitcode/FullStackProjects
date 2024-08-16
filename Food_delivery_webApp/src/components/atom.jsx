@@ -1,4 +1,4 @@
-import { atom, atomFamily, selectorFamily } from "recoil";
+import { atom, atomFamily, selector, selectorFamily } from "recoil";
 import { assets, food_list } from "../assets/assets";
 
 
@@ -49,6 +49,17 @@ export const menuItemsAtom = atom({
     ]
 })
 
+
+
+//food_list
+export const foodListAtom = selectorFamily({
+    key: 'foodListAtom',
+    get: ()=>({get})=>{
+        return food_list.map(elem=>elem)
+    }
+})
+
+
 //  --------- foodItem:img,name,description,price -------
 export const foodItemsAtom = selectorFamily({
     key: 'foodItemsAtom',
@@ -67,8 +78,27 @@ export const ratingsAtom = atom({
 // ------- add/remove icons -------
 export const addRemoveIconsAtom = atom({
     key: 'addRemoveIconsAtom',
-    default: [
-        {iconeWhite: assets.add_icon_white}, 
-        {iconeGreen: assets.add_icon_green},
-        {iconeRed: assets.remove_icon_red}]
+    default: assets
 }) 
+
+
+
+// ***************************************************************
+
+
+//ratings icon
+// export const ratingsAtom = atom({
+//     key: 'ratingsAtom',
+//     default: assets.rating_stars
+// })
+// //add,sub,remove icons add_icon_green,
+//     // add_icon_white,
+//     // remove_icon_red,
+
+// export const cartUpdateIconsAtom = atom({
+//     key: 'cartUpdateIconsAtom',
+//     default: assets
+// })
+
+
+
