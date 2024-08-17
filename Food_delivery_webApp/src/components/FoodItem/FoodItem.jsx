@@ -46,8 +46,35 @@ export default function FoodItem(){
 
                     <div key={elem._id} className=" rounded-xl shadow-lg">
                                     {/* ----------- Image div ----------- */}
-                        <div className="rounded-xl">
-                            <img src={elem.image} alt={elem._id} className="rounded-t-xl hover:scale-105 duration-500  hover:border-[#E85F22]"/>
+                        <div className="rounded-xl relative">
+                            <img src={elem.image} alt={elem._id} className="rounded-t-xl hover:scale-105 duration-500  hover:border-[#E85F22] "/>
+                            <div className="h-fit w-11  absolute bottom-0 right-6">
+                                    {
+                                        (count[elem._id] === 0 || count[elem._id] === undefined)? 
+                                        <img 
+                                        src={addRemoveIcons.add_icon_white} 
+                                        alt={addRemoveIcons.add_icon_white}
+                                        className="p-1 opacity-75"
+                                        onClick={()=>clickHandleAdd(elem._id)}
+                                         />:
+                                        <div className="flex items-center justify-center p-1">
+                                            <img 
+                                            src={addRemoveIcons.add_icon_green} 
+                                            alt={addRemoveIcons.add_icon_green}
+                                            className="p-1 opacity-75"
+                                            onClick={()=>clickHandleAdd(elem._id)} />
+
+                                            <p className="font-bold text-orange-600 text-lg">{count[elem._id]}</p>
+
+                                            <img src={addRemoveIcons.remove_icon_red} 
+                                            alt={addRemoveIcons.remove_icon_red} 
+                                            className="p-1 opacity-75"
+                                            onClick={()=>clickHandleSub(elem._id)} />
+
+                                            {console.log("count:", count, "index: ",index)}
+                                        </div>
+                                    }
+                                </div>
                         </div>
 
                         <div className="p-2">
@@ -62,34 +89,9 @@ export default function FoodItem(){
                                 <p className="text-[12px] font-semibold text-[#676767]">{elem.description}</p>
                             </div>
                                             {/* ----------- food_price ---------- */}
-                            <div className="flex items-center justify-between pb-10">
+                            <div className="flex items-center justify-between pb-2">
                                 <h1 className="text-[#E85F22] text-lg font-semibold">₹{elem.price*84/2}</h1>
-                                <div className="h-fit w-11">
-                                    {
-                                        (count[elem._id] === 0 || count[elem._id] === undefined)? 
-                                        <img 
-                                        src={addRemoveIcons.add_icon_white} 
-                                        alt={addRemoveIcons.add_icon_white}
-                                        onClick={()=>clickHandleAdd(elem._id)}
-                                         />:
-                                        <div>
-                                            <img 
-                                            src={addRemoveIcons.add_icon_green} 
-                                            alt={addRemoveIcons.add_icon_green}
-                                             
-                                            onClick={()=>clickHandleAdd(elem._id)} />
-
-                                            <p>{count[elem._id]}</p>
-
-                                            <img src={addRemoveIcons.remove_icon_red} 
-                                            alt={addRemoveIcons.remove_icon_red} 
-                                            
-                                            onClick={()=>clickHandleSub(elem._id)} />
-
-                                            {console.log("count:", count, "index: ",index)}
-                                        </div>
-                                    }
-                                </div>
+                               
                             </div>
                         </div>
 

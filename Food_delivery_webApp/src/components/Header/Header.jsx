@@ -4,7 +4,7 @@ import '../../App.css'
 export default function Header(){
   return(<>
 
-      <div className="h-[80vh] bg-[url('/header_img.png')] bg-cover bg-center flex flex-col items-center justify-center mt-9 rounded-xl bg-opacity-25 bg-[#fff]">
+      <div className="h-[80vh] bg-[url('/header_img.png')] bg-cover bg-center flex flex-col items-center justify-center mt-9 rounded-xl bg-opacity-25 bg-black/20">
 
           {/* <div className="absolute ml-12 text-[#fff] overflow-hidden  sm:right-10 md:right-20 lg:right-96 "> */}
           <div className="ml-12 text-[#fff] overflow-hidden lg:pr-[42vw] sm:pr-[10vw] md:pr-[20vw] transition-[0.5s] fade-in">
