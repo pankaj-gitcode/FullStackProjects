@@ -46,9 +46,11 @@ export default function FoodItem(){
 
                     <div key={elem._id} className=" rounded-xl shadow-lg">
                                     {/* ----------- Image div ----------- */}
-                        <div className="rounded-xl relative">
-                            <img src={elem.image} alt={elem._id} className="rounded-t-xl hover:scale-105 duration-500  hover:border-[#E85F22] "/>
-                            <div className="h-fit w-11  absolute bottom-0 right-6">
+                        <div className="relative rounded-xl">
+                            <img src={elem.image} alt={elem._id} className=" rounded-t-xl hover:scale-105 duration-500  hover:border-[#E85F22] "/>
+
+                                    {/* --------------- Add/Remove icons ---------- */}
+                            <div className="h-fit w-11 absolute bottom-0 right-28 sm:right-20 md:right-6 xl:right-10 ">
                                     {
                                         (count[elem._id] === 0 || count[elem._id] === undefined)? 
                                         <img 

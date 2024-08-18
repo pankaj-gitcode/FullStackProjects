@@ -77,7 +77,11 @@ export const addRemoveIconsAtom = atom({
     default: assets
 }) 
 
-
+// ---------- all icons ------------
+export const allIconsAtom = atom({
+    key: 'allIconsAtom',
+    default: assets
+})
 
 // ***************************************************************
 

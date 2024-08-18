@@ -1,5 +1,6 @@
 import basket_icon from './basket_icon.png'
 import foodflixlogo from './foodflixlogo.png'
+import foodFlix_logo from './foodFlix_Logo_bg_grey.png'
 import logo from './logo.png'
 import header_img from './header_img.png'
 import search_icon from './search_icon.png'
@@ -63,6 +64,7 @@ import parcel_icon from './parcel_icon.png'
 
 export const assets = {
     foodflixlogo,
+    foodFlix_logo,
     logo,
     basket_icon,
     header_img,

@@ -7,12 +7,12 @@ export default function Navbar(){
     const menuItems = useRecoilValue(menuAtom);
     return(<>
         <nav>
-            <div className="flex justify-between align- pt-6">
+            <div className="flex justify-between pt-6 bg-red-500 ">
 
                 <img src={assets.foodflixlogo} alt="food" className="w-36 h-12 sm:text-lg lg:text-xl"/>
                 
                 {/* --------- all menu/services navbar --------*/}
-                <ul className="flex gap-4 items-center justify-between font-[ubuntu] text-[#49557e] text-[18px]">
+                <ul className="hidden lg:flex gap-4 items-center justify-between font-[ubuntu] text-[#49557e] text-[18px]">
                     {
                         menuItems.map((elem, index)=>
                         <li key={index} className=" active:border-b-red-950 active:border-b-2  cursor-pointer">{elem.item}</li>

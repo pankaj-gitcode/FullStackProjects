@@ -7,12 +7,13 @@ const Navbar = lazy(()=>import('./components/Navbar'));
 const Home = lazy(()=>import('./components/pages/Home/Home.jsx'))
 const Cart = lazy(()=>import('./components/pages/Cart/Cart.jsx'));
 const PlaceOrder = lazy(()=>import('./components/pages/PlaceOrder/PlaceOrder.jsx'));
+const Footer = lazy(()=>import('./components/Footer/Footer.jsx'));
 
 export default function App(){
   return(<>
     <RecoilRoot>
       <Suspense lading={<h5>Loading...</h5>}>
-        <div className="m-auto w-[80%]">
+        <div className="m-auto xl:m-auto w-[80vw] lg:w-[80vw]">
           <Navbar/>
           <BrowserRouter>
             <Routes>
@@ -24,6 +25,7 @@ export default function App(){
           </BrowserRouter>
 
         </div>
+        <div className="w-[80%] sm:w-full lg:w-[100%]"><Footer/></div>
       </Suspense>
     </RecoilRoot>
     
