@@ -20,8 +20,8 @@ console.log("TYPE: ", category)
                 <p className="font-semibold text-xl lg:text-lg xl:text-sm ">Choose from a diverse menu featuring a delectable array of dishes. Our mission is to satisfy your
                 cravings and elevate your dining experience, one delicious meal at a time. </p>
             </div>
-            {/* <div className="grid grid-cols-2 sm:grid-cols-3 lg-grid-cols-5 xl:grid-cols-8 gap-2 justify-center items-center overflow-x-scroll"> */}
-            <div className="flex text-center gap-32 justify-between overflow-x-scroll  my-[20px]">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg-grid-cols-5 xl:grid-cols-8 gap-2 justify-center items-center">
+            {/* <div className="flex text-center  my-[20px]"> */}
                 {
                     menuItems.map((elem,index)=>{
                         return(

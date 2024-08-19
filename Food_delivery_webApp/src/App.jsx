@@ -25,7 +25,7 @@ export default function App(){
           </BrowserRouter>
 
         </div>
-        <div className="w-[80%] sm:w-full lg:w-[100%]"><Footer/></div>
+        <Footer />
       </Suspense>
     </RecoilRoot>
     

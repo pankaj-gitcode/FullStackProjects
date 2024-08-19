@@ -1,60 +1,59 @@
 import React from 'react'
-import { assets } from '../../assets/assets'
+import { useRecoilValue } from 'recoil'
+import { allIconsAtom } from '../atom'
 
 export default function Footer(){
+    const icons = useRecoilValue(allIconsAtom);
     return(<>
-        <div className="mt-6 max-w-[1520] w-[125%] sm:w-[100vw] md:w-[100vw]  ">
+        <div className="bg-[#323232] text-[#d9d9d9] w-full">
 
-        <div className="bg-[#323232] text-[#d9d9d9]">
-        <div>
+            <div className="grid lg:grid-cols-3 gap-6 w-[80vw] m-auto py-10 sm:grid-cols-1">
+                <div className="">
+                        {/* ------ LOGO --------- */}
+                    <img src={icons.foodFlix_logo} alt="foodFlix_Logo"  className="pb-6"/>
 
-        </div>
-            <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-10 py-10 pl-32">
-                {/* ------ Logo, rest. info, social media div ------ */}
+                    {/* --------- Detiails -------- */}
+                    <p className="text-sm font-semibold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque porro corrupti maiores exercitationem? Sint dolorum assumenda nam consequatur quae saepe consectetur maiores corporis eius deleniti ullam, animi possimus nostrum vel optio?</p>
 
-            <div className=" w-[35vw] ">
-            <img src={assets.foodFlix_logo} alt={assets.foodflixlogo} className="w-[10vw]"/>
-
-                <p className=" text-xs pt-5 text-start">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi in architecto, harum quam recusandae voluptate praesentium, unde provident exercitationem nobis veniam quisquam odio sint, iusto ipsum quasi facere! Sunt aperiam illum eum.</p>
-
-                <div className="flex items-center gap-2 pt-6 w-6 cursor-pointer">
-                    <img src={assets.facebook_icon} alt='facebook' />
-                    <img src={assets.twitter_icon} alt="twitter" />
-                    <img src={assets.linkedin_icon} alt="linkedIn" />
+                    {/* --------- Social Media -------- */}
+                    <div className="flex items-center justify-start gap-5 py-6 ">
+                        <a href="https://facebook.com" className="">
+                            <img src={icons.facebook_icon} alt="facebook" className=""/>
+                        </a>
+                        <a href="https://twitter.com">
+                            <img src={icons.twitter_icon} alt="twitter" className=""/>
+                        </a>
+                        <a href="https://linkedin.com">
+                            <img src={icons.linkedin_icon} alt="linkedIn" className=""/>
+                        </a>
+                    </div>
+                </div>
+                        {/* ---------- services/policy --------- */}
+                <div className="lg:ml-20 sm:ml-0">
+                    <h1 className="font-bold text-2xl pt-5">COMPANY</h1>
+                    <ul className="pt-7">
+                        <li>Home</li>
+                        <li>About us</li>
+                        <li>Delivery</li>
+                        <li>Privacy Policy</li>
+                    </ul>
+                </div>
+                    {/* ----------- Contacts ------------ */}
+                <div>
+                    <h1 className="font-bold text-2xl pt-5">GET IN TOUCH</h1>
+                    <ul className="pt-7">
+                        <li>+91-727-254-861</li>
+                        <li>contact@foodflix.com</li>
+                    </ul>
                 </div>
             </div>
+             {/* --------------- Hr ---------- */}
+             <hr className="w-[80vw] m-auto "/>
 
-
-            {/* -------- Services ------------- */}
-            <div className=" ml-20">
-                <h1 className=" text-xl font-bold">SERVICES</h1>
-                <ul className="pt-6 text-sm xl:text-xs">
-                    <li>Home</li>
-                    <li>About us</li>
-                    <li>Delivery</li>
-                    <li>Privacy policy</li>
-                </ul>
-            </div>
-
-
-                {/* ------ Contact -------- */}
-                <div className="sm:text-lg xl:text-xs">
-                    <h1 className="text-xl font-bold">GET IN TOUCH</h1>
-                    <p className="pt-6 ">+91-727-254-861</p>
-                    <p className="mr-2">contact@foodflix.com</p>
-                </div>
-
-
-            </div>
-
-                <hr className="w-[80vw] m-auto border-none bg-gray-500 h-[2px]"/>
-
-            <div>
-                <p className="p-6 text-center text-sm xl:text-xs ">Copyright 2024 &#169; foodflix.com. All Right Reserved</p>
-            </div>
-
-        </div>
-
+             {/* ----------- copyright -------- */}
+             <div className="flex items-center justify-center py-6">
+                <p className="text-sm">Copyright 2024 &copy; foodflix.com - All Right Reserved</p>
+             </div>
 
         </div>
     </>)
