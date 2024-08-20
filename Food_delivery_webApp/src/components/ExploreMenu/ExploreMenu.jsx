@@ -14,7 +14,7 @@ console.log("TYPE: ", category)
     return(<>
     
     
-        <div className="py-10">
+        <div className="py-10" id="menu"> 
             <h1 className="text-6xl sm:text-6xl md:text-5xl xl:text-6xl font-semibold ">Explore our menu</h1>
             <div className="w-[60%] pt-5 pb-7">
                 <p className="font-semibold text-xl lg:text-lg xl:text-sm ">Choose from a diverse menu featuring a delectable array of dishes. Our mission is to satisfy your

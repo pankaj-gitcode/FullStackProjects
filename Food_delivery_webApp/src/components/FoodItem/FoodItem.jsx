@@ -17,7 +17,7 @@ export default function FoodItem(){
         setCount({
             ...count,[id]:(count[id] || 0 )+ 1
         })
-        console.log("count[id]: ", count[id], id, count);
+        // console.log("count[id]: ", count[id], id, count);
     }
     // ------------- when -icon clicked ---------------
     const clickHandleSub = (id)=>{
@@ -29,7 +29,7 @@ export default function FoodItem(){
         )
     }
 
-    console.log("NEW-TYPE: ",category);
+    // console.log("NEW-TYPE: ",category);
 
     useEffect(()=>{
         if(category === 'All'){setCategorisedFood(foodItem)}
@@ -73,7 +73,7 @@ export default function FoodItem(){
                                             className="p-1 opacity-75"
                                             onClick={()=>clickHandleSub(elem._id)} />
 
-                                            {console.log("count:", count, "index: ",index)}
+                                            {/* {console.log("count:", count, "index: ",index)} */}
                                         </div>
                                     }
                                 </div>

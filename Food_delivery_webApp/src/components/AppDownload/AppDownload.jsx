@@ -6,7 +6,7 @@ import { allIconsAtom } from '../atom'
 export default function AppDownload(){
     const appStore = useRecoilValue(allIconsAtom);
     return(<>
-        <div className="flex flex-col items-center justify-center my-20">
+        <div className="flex flex-col items-center justify-center my-20 " id="mobile-app">
                 {/* -------- Title ------- */}
             <div className="my-6 text-center leading-6">
                 <h1 className="text-[#000] font-semibold text-4xl">For Better Experience Download <br/>FoodFlix App</h1>

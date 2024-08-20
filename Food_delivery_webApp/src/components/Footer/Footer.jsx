@@ -5,7 +5,7 @@ import { allIconsAtom } from '../atom'
 export default function Footer(){
     const icons = useRecoilValue(allIconsAtom);
     return(<>
-        <div className="bg-[#323232] text-[#d9d9d9] w-full">
+        <div className="bg-[#323232] text-[#d9d9d9] w-full" id="footer">
 
             <div className="grid lg:grid-cols-3 gap-6 w-[80vw] m-auto py-10 sm:grid-cols-1">
                 <div className="">

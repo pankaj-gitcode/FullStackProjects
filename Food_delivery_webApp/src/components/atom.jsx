@@ -7,7 +7,7 @@ import { assets, food_list } from "../assets/assets";
 // NavBar: menu list items
 export const menuAtom = atom({
     key: 'menuAtom',
-    default: [{item: 'menu'}, {item: 'mobile-app'}, {item: 'contact-us'}, {item: 'home'}]
+    default: [{item: 'home', link:'/'}, {item: 'menu', link:'#menu'}, {item: 'mobile-app', link:'#mobile-app'}, {item: 'contact us', link:'#footer'}]
 })
 
 //ExploreMenu: list of menu
@@ -82,6 +82,16 @@ export const allIconsAtom = atom({
     key: 'allIconsAtom',
     default: assets
 })
+
+// ---------- Signup/Login ---------
+export const loginAtom = atom({
+    key: 'loginAtom',
+    default: false
+})
+
+
+
+
 
 // ***************************************************************
 
