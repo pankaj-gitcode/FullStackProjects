@@ -5,8 +5,8 @@ import { loginAtom, menuAtom } from './atom'
 
 export default function Navbar(){
     const menuItems = useRecoilValue(menuAtom);
-    const [login,setLogin ] = useRecoilState(loginAtom);
-    console.log("NavSignIn: ", login)
+    
+    const [login, setLogin] = useRecoilState(loginAtom);
 
     return(<>
         <nav>
@@ -35,7 +35,7 @@ export default function Navbar(){
                      {/* setLogin prop set to 'true' if clicked on SignIn button & LoginPage display, value passed to App.jsx useState */}
                     <button 
                     className="border-2 rounded-[300px] border-orange-600 px-6 py-1 text-[#49557e] text-[16px] bg-transparent active:scale-105" 
-                    onClick={()=>setLogin(true)}
+                    onClick = {()=>setLogin(true)}
                     >SignIn</button>
                 </div>
             </div>
