@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './index.css'
 import { useRecoilValue } from 'recoil';
 import { loginAtom } from './components/atom.jsx';
+import LoginPopup from './components/LoginPopup/LoginPopup.jsx';
 
 
 const Navbar = lazy(()=>import('./components/Navbar'));
@@ -10,19 +11,21 @@ const Home = lazy(()=>import('./components/pages/Home/Home.jsx'))
 const Cart = lazy(()=>import('./components/pages/Cart/Cart.jsx'));
 const PlaceOrder = lazy(()=>import('./components/pages/PlaceOrder/PlaceOrder.jsx'));
 const Footer = lazy(()=>import('./components/Footer/Footer.jsx'));
-const LoginPopup = lazy(()=>import('./components/LoginPopup/LoginPopup.jsx'));
+
 
 export default function App(){
-  
   const login = useRecoilValue(loginAtom);
-  return(<>
+  
+  return(<div className="relative">
     
       <Suspense loading={<h5>Loading...</h5>}>
           {/* ---------- SignIn button clicked,triggers setLogin in <Navbar/> as true results login=true renders login page-------- */}
           {
-            login?<LoginPopup />:<></>
+            login?<div className="absolute bg-black/50 h-[100vh] w-[100vw] grid place-items-center">
+              <LoginPopup/>
+            </div>:<></>
           }
-        
+                  
         <div className="m-auto xl:m-auto w-[80vw] lg:w-[80vw]">
           <Navbar/>
           <BrowserRouter>
@@ -42,6 +45,6 @@ export default function App(){
       </Suspense>
       
 
-  </>
+  </div>
   )
 }
