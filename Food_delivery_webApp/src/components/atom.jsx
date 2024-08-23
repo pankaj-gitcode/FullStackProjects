@@ -71,13 +71,24 @@ export const ratingsAtom = atom({
     default: assets.rating_stars
 })
 
+
 // ------- add/remove icons -------
 export const addRemoveIconsAtom = atom({
     key: 'addRemoveIconsAtom',
     default: assets
 }) 
+// --------- items stored in countItems ---------
+export const countItemsAtom = atom({
+    key: 'countItemsAtom',
+    default: []
+})
+// ------------ cart Items ------------
+export const cartItemsAtom = atomFamily({
+    key: 'cartitemsAtom',
+    default: ()=>Array.from(countItemsAtom).map(elem=>elem)
+})
 
-// ---------- all icons ------------
+// ---------- all icons/assets ------------
 export const allIconsAtom = atom({
     key: 'allIconsAtom',
     default: assets

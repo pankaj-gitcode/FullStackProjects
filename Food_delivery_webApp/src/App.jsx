@@ -27,10 +27,11 @@ export default function App(){
           }
                   
         <div className="m-auto xl:m-auto w-[80vw] lg:w-[80vw]">
-          <Navbar/>
           <BrowserRouter>
+          <Navbar/>
             <Routes>
               <Route path='/' element={<Home/>} />
+              <Route path='/navigate' element={<Navbar/>}/>
               <Route path='/home' element={<Home/>} />
               <Route path='/cart' element={<Cart/>} />
               <Route path='/placeorder' element={<PlaceOrder/>} />

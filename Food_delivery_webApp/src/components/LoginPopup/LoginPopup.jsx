@@ -9,9 +9,9 @@ export default function LoginPopup(){
 
 
     return(<>
-        <div className="">
+        <div>
 
-         <form className="bg-[#fff] flex flex-col place-items-between px-10 py-2 w-fit rounded-lg overflow-hidden">
+         <form className="bg-[#fff] flex flex-col place-items-between px-10 py-2 w-fit rounded-lg overflow-hidden shadow-[2px_2px_6px_2px_rgba(0,0,0,0.6)]">
 
                 {/* ---------- page title + Exit ----------- */}
                 <div className="flex justify-between items-center pb-5 cursor-pointer active">
@@ -22,7 +22,7 @@ export default function LoginPopup(){
                 currentState==="SignUp"?<div >
 
             <div className="grid gap-3 pt-2">
-                {/* --------- form: name,email.pass-------- */}
+                {/* --------- form: name,email,pass-------- */}
                 <input type="text" placeholder="Enter name" className="border-[2px] border-slate-200 text-2xl lg:text-sm rounded-md focus:outline-none pl-2" required/>
                 <input type="email" placeholder="Enter mail" className="border-[2px] border-slate-200 text-2xl lg:text-sm rounded-md focus:outline-none pl-2" required/>
                 <input type="password" placeholder="Enter password" className="border-[2px] border-slate-200 text-2xl lg:text-sm rounded-md focus:outline-none pl-2" required/>
@@ -44,9 +44,13 @@ export default function LoginPopup(){
                 </div>:<div>
                     {/* ------------- login credentials ---------- */}
                     <div className="flex flex-col gap-2 pb-6 pt-2">
+
                         <input type="email" placeholder="Enter Email" className="border-[2px] border-slate-200 text-2xl lg:text-sm rounded-md focus:outline-none pl-2" required/>
+
                         <input type="password" placeholder="Enter password" className="border-[2px] border-slate-200 text-2xl lg:text-sm rounded-md focus:outline-none pl-2" required/>
+
                         <div className="pt-2">
+
                             <p className="text-2xl lg:text-sm bg-orange-600 rounded-sm text-center cursor-pointer active:scale-105 transition-[300] ease-in-out py-1">Submit</p>
                         </div>
                     </div>

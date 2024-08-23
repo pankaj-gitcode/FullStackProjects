@@ -1,12 +1,12 @@
 
 import React, { useEffect, useState } from 'react'
-import { useRecoilValue } from 'recoil'
-import { addRemoveIconsAtom,  categoryAtom,  foodItemsAtom , ratingsAtom } from '../atom';
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { addRemoveIconsAtom,  categoryAtom,  countItemsAtom,  foodItemsAtom , ratingsAtom } from '../atom';
 
 export default function FoodItem(){
     const foodItem = useRecoilValue(foodItemsAtom());
     const ratings = useRecoilValue(ratingsAtom);
-    const [count, setCount] = useState({});
+    const [count, setCount] = useRecoilState(countItemsAtom);
     const addRemoveIcons = useRecoilValue(addRemoveIconsAtom);
     const category = useRecoilValue(categoryAtom);
     const [categorisedFood, setCategorisedFood] = useState([])
@@ -30,6 +30,7 @@ export default function FoodItem(){
     }
 
     // console.log("NEW-TYPE: ",category);
+    // console.log(count)
 
     useEffect(()=>{
         if(category === 'All'){setCategorisedFood(foodItem)}
@@ -37,6 +38,9 @@ export default function FoodItem(){
             setCategorisedFood(foodItem.filter(elem=>elem.category === category))
         }
     }, [category])
+
+    const countItem = ()=> count
+    console.log("countItem: ", countItem())
    
     return(<>
         
@@ -45,6 +49,7 @@ export default function FoodItem(){
                     return(
 
                     <div key={elem._id} className=" rounded-xl shadow-lg">
+                      <p></p>
                                     {/* ----------- Image div ----------- */}
                         <div className="relative rounded-xl">
                             <img src={elem.image} alt={elem._id} className=" rounded-t-xl hover:scale-105 duration-500  hover:border-[#E85F22] "/>
@@ -100,6 +105,7 @@ export default function FoodItem(){
                     </div>
                     )
                 })
+                
             }
     </>)
 }

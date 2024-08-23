@@ -17,15 +17,16 @@ export default function Footer(){
 
                     {/* --------- Social Media -------- */}
                     <div className="flex items-center justify-start gap-5 py-6 ">
-                        <a href="https://facebook.com" className="">
+                        <a href="https://facebook.com"  className="" target="_blank">
                             <img src={icons.facebook_icon} alt="facebook" className=""/>
                         </a>
-                        <a href="https://twitter.com">
+                        <a href="https://twitter.com" target="_blank">
                             <img src={icons.twitter_icon} alt="twitter" className=""/>
                         </a>
-                        <a href="https://linkedin.com">
+                        <a href="https://linkedin.com" target="_blank">
                             <img src={icons.linkedin_icon} alt="linkedIn" className=""/>
                         </a>
+                        
                     </div>
                 </div>
                         {/* ---------- services/policy --------- */}
