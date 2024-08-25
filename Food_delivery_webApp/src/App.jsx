@@ -31,7 +31,7 @@ export default function App(){
           <Navbar/>
             <Routes>
               <Route path='/' element={<Home/>} />
-              <Route path='/navigate' element={<Navbar/>}/>
+              <Route path='/navbar' element={<Navbar/>}/>
               <Route path='/home' element={<Home/>} />
               <Route path='/cart' element={<Cart/>} />
               <Route path='/placeorder' element={<PlaceOrder/>} />
