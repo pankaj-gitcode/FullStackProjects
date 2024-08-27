@@ -11,6 +11,7 @@ export default function FoodItem(){
     const category = useRecoilValue(categoryAtom);
     const [categorisedFood, setCategorisedFood] = useState([])
     
+    
     // ------------- when +icon clicked ---------------
   
     const clickHandleAdd = (id)=>{
@@ -59,10 +60,10 @@ export default function FoodItem(){
                                     {
                                         (count[elem._id] === 0 || count[elem._id] === undefined)? 
                                         <img 
-                                        src={addRemoveIcons.add_icon_white} 
-                                        alt={addRemoveIcons.add_icon_white}
-                                        className="p-1 opacity-75"
-                                        onClick={()=>clickHandleAdd(elem._id)}
+                                            src={addRemoveIcons.add_icon_white} 
+                                            alt={addRemoveIcons.add_icon_white}
+                                            className="p-1 opacity-75"
+                                            onClick={()=>clickHandleAdd(elem._id)}
                                          />:
                                         <div className="flex items-center justify-center p-1">
                                             <img 
@@ -74,9 +75,9 @@ export default function FoodItem(){
                                             <p className="font-bold text-orange-600 text-lg">{count[elem._id]}</p>
 
                                             <img src={addRemoveIcons.remove_icon_red} 
-                                            alt={addRemoveIcons.remove_icon_red} 
-                                            className="p-1 opacity-75"
-                                            onClick={()=>clickHandleSub(elem._id)} />
+                                                alt={addRemoveIcons.remove_icon_red} 
+                                                className="p-1 opacity-75"
+                                                onClick={()=>clickHandleSub(elem._id)} />
 
                                             {/* {console.log("count:", count, "index: ",index)} */}
                                         </div>

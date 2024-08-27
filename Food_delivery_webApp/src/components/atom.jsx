@@ -80,13 +80,14 @@ export const addRemoveIconsAtom = atom({
 // --------- items stored in countItems ---------
 export const countItemsAtom = atom({
     key: 'countItemsAtom',
-    default: []
+    default: {}
 })
 // ------------ cart Items ------------
 export const cartItemsAtom = atomFamily({
     key: 'cartitemsAtom',
     default: ()=>Array.from(countItemsAtom).map(elem=>elem)
 })
+
 
 // ---------- all icons/assets ------------
 export const allIconsAtom = atom({

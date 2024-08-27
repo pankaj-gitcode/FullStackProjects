@@ -1,11 +1,20 @@
 import React from 'react'
-import { useRecoilValue } from 'recoil'
+import {  useRecoilState, useRecoilValue } from 'recoil'
 import { countItemsAtom, foodItemsAtom } from '../../atom'
 
 export default function Cart(){
     const foodItem = useRecoilValue(foodItemsAtom());
-    const countItems = useRecoilValue(countItemsAtom);
-    console.log("cont: ", countItems) 
+    // const countItems = useRecoilValue(countItemsAtom);
+    const [countItems, setCountItems] = useRecoilState(countItemsAtom);
+   
+    console.log("cont: ", countItems)
+    const clickHandle = (id)=>{
+        setCountItems((prevCount)=>{
+            const newCount = {...prevCount,[id]:Math.max(prevCount[id]-1, 0)};
+            // delete newCount[id];
+            return newCount;
+        })
+    }
     
     return(<>
 
@@ -30,7 +39,7 @@ export default function Cart(){
                                 <p>{elem.price}</p>
                                 <p>{countItems[elem._id]}</p>
                                 <p>{elem.price * countItems[elem._id] }</p>
-                                <p>x</p>
+                                <p onClick={()=>clickHandle(elem._id)}>x</p>
                                 <hr className="w-[76vw]"/>
                                 </div>)
                             }
