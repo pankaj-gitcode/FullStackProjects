@@ -16,7 +16,7 @@ export default function Navbar(){
         <nav>
             <div className="flex justify-between pt-6 " id="nav">
                     {/* ----------- brand Logo -------------- */}
-              <img src={assets.foodflixlogo} alt="food" className="w-36 h-12 sm:text-lg lg:text-xl" onClick={()=>navigateTo('/')}/>
+              <img src={assets.foodflixlogo} alt="food" className="w-36 h-12 sm:text-lg lg:text-xl cursor-pointer" onClick={()=>navigateTo('/')}/>
                 
                 {/* --------- all menu/services navbar --------*/}
                 <ul className="hidden lg:flex gap-4 items-center justify-between font-normal text-[#49557e] text-[18px]">
@@ -34,7 +34,7 @@ export default function Navbar(){
 
                         {/* ----------------- Cart ----------------- */}
                     <div className='relative'>
-                        <img src={assets.basket_icon} alt="cart"  onClick={()=>navigateTo('/cart')}/>
+                        <img src={assets.basket_icon} alt="cart" className="cursor-pointer"  onClick={()=>navigateTo('/cart')}/>
                         {/* <div className='absolute w-2 h-2 bg-red-600 -top-1 -right-1 rounded-full hover:bg-slate-50'></div> */}
                         
                         {

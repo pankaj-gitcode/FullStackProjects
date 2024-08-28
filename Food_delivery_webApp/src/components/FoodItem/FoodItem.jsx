@@ -98,7 +98,7 @@ export default function FoodItem(){
                             </div>
                                             {/* ----------- food_price ---------- */}
                             <div className="flex items-center justify-between pb-2">
-                                <h1 className="text-[#E85F22] text-lg font-semibold">₹{elem.price*84/2}</h1>
+                                <h1 className="text-[#E85F22] text-lg font-semibold">${elem.price}</h1>
                                
                             </div>
                         </div>
