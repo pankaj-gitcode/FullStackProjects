@@ -1,7 +1,7 @@
 import React from 'react'
 import { assets } from '../assets/assets'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { loginAtom, menuAtom } from './atom';
+import { loginAtom, menuAtom, totalCartPriceAtom } from './atom';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -9,6 +9,7 @@ export default function Navbar(){
     const menuItems = useRecoilValue(menuAtom);
     const [login, setLogin] = useRecoilState(loginAtom);   
     const navigateTo = useNavigate();
+    const cartBlinking = useRecoilValue(totalCartPriceAtom);
 
 
     return(<>
@@ -34,7 +35,11 @@ export default function Navbar(){
                         {/* ----------------- Cart ----------------- */}
                     <div className='relative'>
                         <img src={assets.basket_icon} alt="cart"  onClick={()=>navigateTo('/cart')}/>
-                        <div className='absolute w-2 h-2 bg-red-600 -top-1 -right-1 rounded-full hover:bg-slate-50'></div>
+                        {/* <div className='absolute w-2 h-2 bg-red-600 -top-1 -right-1 rounded-full hover:bg-slate-50'></div> */}
+                        
+                        {
+                            cartBlinking? <div className="absolute w-2 h-2 bg-red-600 -top-1 -right-1 rounded-full"></div>:<></>
+                        }
                     </div>
                             {/* ------------------- SIgnIn BUtton -------------- */}
                      {/* setLogin prop set to 'true' if clicked on SignIn button & LoginPage display, value passed to App.jsx useState */}

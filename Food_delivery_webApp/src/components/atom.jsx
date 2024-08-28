@@ -101,7 +101,11 @@ export const loginAtom = atom({
     default: false
 })
 
-
+// ----------- Total cart Item's price ----------
+export const totalCartPriceAtom = atom({
+    key: 'totalCartPriceAtom',
+    default: 0
+})
 
 
 
