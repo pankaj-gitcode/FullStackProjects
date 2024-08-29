@@ -109,7 +109,7 @@ export default function Cart() {
                 <p>
                   Delivery Fee <hr />
                 </p>
-                <p>2</p>
+                <p>$2</p>
                 <p className="font-bold">Total</p>
                 <p className="font-bold">
                   ${totalCartPrice ? totalCartPrice + 2 : 0}
