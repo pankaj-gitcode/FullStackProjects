@@ -12,6 +12,10 @@ connectToDB();
 //API endpoint for routeer: foodRequester
 app.use('/api/food', foodRequester);
 
+//to view particular file:here upload
+app.use('/images', express.static('./uploads'));
+
+
 //middleware
 app.use(express.json());
 app.use(cors());
@@ -23,3 +27,4 @@ app.get('/', (req,res)=>{
 app.listen(PORT, (req, res)=>{
     console.log(`Server listening on http://localhost:${PORT}`);
 })
+

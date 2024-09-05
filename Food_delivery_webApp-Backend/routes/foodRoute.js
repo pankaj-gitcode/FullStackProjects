@@ -2,7 +2,7 @@ import express from 'express'
 import fs from 'fs'
 import path from 'path'
 
-import { addFood } from '../controllers/foodController.js';
+import { addFood, listFood } from '../controllers/foodController.js';
 import multer from 'multer';
 
 const foodRequester = express.Router();
@@ -38,16 +38,15 @@ const storage = multer.diskStorage({
             
         })
 
-
-
 // storage to store the uploded files
 const upload = multer({
     storage:storage
 })
 
-
 //create a route to navigate addFood 
 foodRequester.post('/add', upload.single("image") ,addFood);
+foodRequester.get('/list', listFood);
 
 //export food routes 
 export default foodRequester;
+
