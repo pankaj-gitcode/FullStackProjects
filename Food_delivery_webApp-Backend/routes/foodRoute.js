@@ -2,7 +2,7 @@ import express from 'express'
 import fs from 'fs'
 import path from 'path'
 
-import { addFood, listFood } from '../controllers/foodController.js';
+import { addFood, listFood, removeFoodItem } from '../controllers/foodController.js';
 import multer from 'multer';
 
 const foodRequester = express.Router();
@@ -46,6 +46,7 @@ const upload = multer({
 //create a route to navigate addFood 
 foodRequester.post('/add', upload.single("image") ,addFood);
 foodRequester.get('/list', listFood);
+foodRequester.post('/deleteFoodItems', removeFoodItem)
 
 //export food routes 
 export default foodRequester;

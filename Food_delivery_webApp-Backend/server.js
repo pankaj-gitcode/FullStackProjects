@@ -9,6 +9,10 @@ const PORT = 3000;
 //Connect to MongoDB
 connectToDB();
 
+//middleware
+app.use(express.json());
+app.use(cors());
+
 //API endpoint for routeer: foodRequester
 app.use('/api/food', foodRequester);
 
@@ -16,9 +20,6 @@ app.use('/api/food', foodRequester);
 app.use('/images', express.static('./uploads'));
 
 
-//middleware
-app.use(express.json());
-app.use(cors());
 
 app.get('/', (req,res)=>{
     res.status(200).json({msg: "WORKING..."})
