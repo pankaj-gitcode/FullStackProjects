@@ -1,12 +1,21 @@
-import React from 'react'
-import './App.css'
+import React, { lazy, Suspense } from 'react'
+
+
+const Navbar = lazy(()=>import('./components/Navbar/Navbar.jsx'));
+const Sidebar = lazy(()=>import('./components/Sidebar/Sidebar.jsx'));
+
 export default function App(){
 
-  return(<>
-    <div>
-      <h1 className="text-xl font-bold">HEELOO</h1>
+  return(<div>
+        <Suspense fallback={<h1>Loading...</h1>}>
 
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum, velit dolor! Voluptas repudiandae in cumque porro aspernatur ab iure deleniti vero dicta, nisi dolorem molestiae commodi accusamus qui aliquam consectetur eius necessitatibus!</p>
-    </div>
-  </>)
+          <Navbar/>
+          <hr className="border-2 border-solid border-slate-300" />
+
+          <div>
+            <Sidebar/>
+          </div>
+
+        </Suspense>
+  </div>)
 }
