@@ -3,7 +3,7 @@ import { assets } from '../../assets/assets'
 
 export default function Navbar(){
     return(<>
-        <div className="flex items-center justify-between px-10 py-5 ">
+        <div className="flex items-center justify-between px-10 py-5">
         {/* ------------ Logo Admin -------- */}
         <div>
             <img src={assets.foodflixlogo} alt="FoodFlix_logo" 
