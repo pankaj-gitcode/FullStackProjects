@@ -6,7 +6,7 @@ export default function Sidebar(){
     const navigateTo = useNavigate();
     return(<>
         {/* ---------------------- SIDEBAR -------------------- */}
-        <div className="w-[50vw] sm:w-[50vw] lg:w-[18%] h-[min(100vh)] border-[3px] border-gray-300 border-solid border-t-0">
+        <div className="w-[100vw] sm:w-[30vw] lg:w-[18%] h-[min(100vh)] border-[3px] border-gray-300 border-solid border-t-0">
 
             {/* ---------------------- sidebar-Container: divs --------------------- */}
             <div className="flex flex-col items-end gap-6 pt-12 ">

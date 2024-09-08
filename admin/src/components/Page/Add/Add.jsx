@@ -49,13 +49,13 @@ const Add = ()=>{
                             {/* ------- Price -------- */}
                         <div>
                             <p>Product Price</p>
-                            <input type="number" name="price" placeholder="$12"/>
+                            <input type="number" name="price" placeholder="$12" className="focus:outline-none border-2 w-[5vw]"/>
                         </div>
                     </div>
 
                     {/* -------------- Add button ------------ */}
                     <div className="pt-5">
-                        <button className="bg-[#000] py-2 px-10 text-[#fff] text-sm active:bg-[#fff] active:border-2 active:border-slate-900 active:text-[#000] shadow-[1px_2px_5px_1px_rgba(0,0,0,0.5)] rounded-sm active:scale-105">ADD</button>
+                        <button className="bg-[#000] py-2 px-10 text-[#fff] text-sm active:bg-[#fff] active:border-2 active:border-slate-900 active:text-[#000] shadow-[1px_2px_5px_1px_rgba(0,0,0,0.5)] rounded-sm active:scale-90 duration-300 ">ADD</button>
                     </div>
                 </form>
 
