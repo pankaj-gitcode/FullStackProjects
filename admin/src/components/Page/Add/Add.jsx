@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { assets } from '../../../assets/assets';
 
 const Add = ()=>{
+    const [upload, setUpload] = useState(false);
     return(<>
         <div className="flex p-12 ">
             <div>
@@ -12,10 +13,10 @@ const Add = ()=>{
                     <div className="flex flex-col gap-2 ">
                         <p>Upload image</p>
                         <label htmlFor="image">
-                            <img src={assets.upload_area} alt="upload_file" />
+                            <img src={upload?URL.createObjectURL(upload):assets.upload_area} alt="upload_file" className="cursor-pointer"/>
                         </label>
                         
-                        <input type="file" id= "image" hidden required/>
+                        <input type="file" id= "image" onChange={(e)=>setUpload(e.target.files[0])}   hidden required/>
                     </div>
 
                     {/* --------- Product name ---------- */}
