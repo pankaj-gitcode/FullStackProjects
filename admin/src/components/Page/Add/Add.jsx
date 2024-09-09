@@ -13,7 +13,7 @@ const Add = ()=>{
                     <div className="flex flex-col gap-2 ">
                         <p>Upload image</p>
                         <label htmlFor="image">
-                            <img src={upload?URL.createObjectURL(upload):assets.upload_area} alt="upload_file" className="cursor-pointer"/>
+                            <img src={upload?URL.createObjectURL(upload):assets.upload_area} alt="upload_file" className="cursor-pointer w-32 h-32 object-cover bg-center "/>
                         </label>
                         
                         <input type="file" id= "image" onChange={(e)=>setUpload(e.target.files[0])}   hidden required/>
