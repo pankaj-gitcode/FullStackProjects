@@ -1,8 +1,21 @@
 import React, { useState } from 'react'
 import { assets } from '../../../assets/assets';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { dataAtom } from '../../Atom';
 
 const Add = ()=>{
     const [upload, setUpload] = useState(false);
+    const [data, setData] = useRecoilState(dataAtom);
+    // create handler 
+    const clickHandler = (e)=>{
+        const name= e.target.name;
+        const value = e.target.value;
+        setData(data=>({
+            ...data,[name]:value
+        }))
+    }
+
+    console.log("DATA: ", data);
     return(<>
         <div className="flex p-12 ">
             <div>
@@ -22,13 +35,13 @@ const Add = ()=>{
                     {/* --------- Product name ---------- */}
                     <div className="my-6">
                         <p className="my-2">Product name</p>
-                        <input type="text" className="border-2 border-solid w-[30vw] p-1 text-sm focus:outline-none" placeholder="Type here"/>
+                        <input type="text" className="border-2 border-solid w-[30vw] p-1 text-sm focus:outline-none" placeholder="Type here" name="name" onChange={clickHandler}/>
                     </div>
 
                     {/* --------- Product description ---------- */}
                     <div>
                         <p className="my-2">Product description</p>
-                        <textarea name="description" rows='5' placeholder="write some content here" className="border-2 pl-1 w-[30vw] text-sm focus:outline-none"></textarea>
+                        <textarea name="description" rows='5' placeholder="write some content here" className="border-2 pl-1 w-[30vw] text-sm focus:outline-none" onChange={clickHandler}></textarea>
                     </div>
 
                     {/* --------- Product category & price ---------- */}
@@ -36,7 +49,7 @@ const Add = ()=>{
                             {/* ----- category ------ */}
                         <div>
                             <p>Product Category</p>
-                            <select name="category" className="text-sm text-[#000]">
+                            <select name="category" className="text-sm text-[#000]" onChange={clickHandler}>
                                 <option value="Salad">Salad</option>
                                 <option value="Rolls">Rolls</option>
                                 <option value="Sandwhich">Sandwhich</option>
@@ -50,7 +63,7 @@ const Add = ()=>{
                             {/* ------- Price -------- */}
                         <div>
                             <p>Product Price</p>
-                            <input type="number" name="price" placeholder="$12" className="focus:outline-none border-2 w-[5vw]"/>
+                            <input type="number" name="price" onChange={clickHandler} placeholder="$12" className="focus:outline-none border-2 w-[5vw]" />
                         </div>
                     </div>
 
