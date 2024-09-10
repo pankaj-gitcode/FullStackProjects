@@ -1,6 +1,9 @@
 import React, { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom';
 
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Navbar = lazy(()=>import('./components/Navbar/Navbar.jsx'));
 const Sidebar = lazy(()=>import('./components/Sidebar/Sidebar.jsx'));
 const Add = lazy(()=>import('./components/Page/Add/Add.jsx'));
@@ -14,8 +17,8 @@ export default function App(){
           
           <Navbar/>
           <hr className="border-2 border-solid border-slate-300" />
-
             <div className="flex ">
+            <ToastContainer />
             <Sidebar/>
               <Routes>
                 <Route path={'/add'} element={<Add />} />

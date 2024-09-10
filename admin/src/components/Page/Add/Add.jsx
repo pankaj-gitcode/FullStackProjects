@@ -3,6 +3,7 @@ import { assets } from '../../../assets/assets';
 import { useRecoilState} from 'recoil';
 import { dataAtom } from '../../Atom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Add = ()=>{
     const [upload, setUpload] = useState(false);
@@ -36,7 +37,7 @@ const submitHandler = async (e)=>{
 
     // console.log("RESPONSE-DATA: ", response.data);
 
-    if(response){
+    if(response.data.success){
           //reset the original data store
         setData({
                 name: '',
@@ -45,6 +46,7 @@ const submitHandler = async (e)=>{
                 price:''
             })
             setUpload(false);
+            toast.success(response.data.data)
     }  
 }
 
