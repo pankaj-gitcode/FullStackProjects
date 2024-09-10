@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { assets } from '../../../assets/assets';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState} from 'recoil';
 import { dataAtom } from '../../Atom';
 import axios from 'axios';
 
 const Add = ()=>{
     const [upload, setUpload] = useState(false);
     const [data, setData] = useRecoilState(dataAtom);
-    // create handler 
+
+    // ---- create handler ----- 
     const clickHandler = (e)=>{
         const name= e.target.name;
         const value = e.target.value;
@@ -16,30 +17,38 @@ const Add = ()=>{
         }))
     }
 
+    // ---------- Submit Handler ----------
 const submitHandler = async (e)=>{
-    const URL = 'http://localhost:3000'
+    const URL = 'http://localhost:3000';
+
+    //prevent from default refresh
     e.preventDefault();
-    const formData = new FormData();
+
+    const formData = new FormData(); //contains all the form-field data
     formData.append("name",data.name);
     formData.append("description", data.description);
     formData.append("category", data.category);
     formData.append("price", Number(data.price));
     formData.append("image", upload);
 
-    const response = await axios.post(`${URL}/api/food/add`, formData);
+    //fetch API
+    const response = await axios.post(`${URL}/api/food/add`, formData);  
 
-    if(response.data.success){
+    // console.log("RESPONSE-DATA: ", response.data);
+
+    if(response){
+          //reset the original data store
         setData({
-            name: '',
-            description:'',
-            category: '',
-            price:''
-        })
-        setUpload(false);
-    }
+                name: '',
+                description:'',
+                category: '',
+                price:''
+            })
+            setUpload(false);
+    }  
 }
 
-    console.log("DATA: ", data);
+    // console.log("DATA: ", data);
     return(<>
         <div className="flex p-12 ">
             <div>
@@ -93,7 +102,7 @@ const submitHandler = async (e)=>{
 
                     {/* -------------- Add button ------------ */}
                     <div className="pt-5">
-                        <button className="bg-[#000] py-2 px-10 text-[#fff] text-sm active:bg-[#fff] active:border-2 active:border-slate-900 active:text-[#000] shadow-[1px_2px_5px_1px_rgba(0,0,0,0.5)] rounded-sm active:scale-90 duration-300 " id='image'>ADD</button>
+                        <button className="bg-[#000] py-2 px-10 text-[#fff] text-sm active:bg-[#fff] active:border-2 active:border-slate-900 active:text-[#000] shadow-[1px_2px_5px_1px_rgba(0,0,0,0.5)] rounded-sm active:scale-90 duration-300 " >ADD</button>
                     </div>
                 </form>
 
