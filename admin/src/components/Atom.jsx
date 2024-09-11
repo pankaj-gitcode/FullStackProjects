@@ -9,5 +9,10 @@ export const dataAtom = atom({
         price: '' ,
         category: ''
     }
+})
 
+//list the food items
+export const listAtom = atom({
+    key: 'listAtom',
+    default: []
 })

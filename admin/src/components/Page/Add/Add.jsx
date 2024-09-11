@@ -3,7 +3,9 @@ import { assets } from '../../../assets/assets';
 import { useRecoilState} from 'recoil';
 import { dataAtom } from '../../Atom';
 import axios from 'axios';
+
 import { toast } from 'react-toastify';
+
 
 const Add = ()=>{
     const [upload, setUpload] = useState(false);
@@ -46,8 +48,10 @@ const submitHandler = async (e)=>{
                 price:''
             })
             setUpload(false);
+            // notification on successfull upload to DB
             toast.success(response.data.data)
-    }  
+    }
+    else{toast.error("some Error!...")}  
 }
 
     // console.log("DATA: ", data);
