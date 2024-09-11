@@ -52,10 +52,6 @@ const List = ()=>{
                     )
                 }
 
-               
-
-
-
             </div>
         
     </div>
