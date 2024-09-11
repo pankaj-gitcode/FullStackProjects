@@ -25,7 +25,7 @@ const List = ()=>{
 
     return(<>
     <div className="flex p-10 ">
-            <div className=" w-[80vw]  bg-[#d5e4f3] rounded-xl shadow-[5px_5px_8px_2px_rgba(0,0,0,0.3)] ">
+            <div className=" border-2 rounded-xl shadow-[5px_5px_8px_2px_rgba(0,0,0,0.3)]">
                 {/* ----- items tite ------- */}
                 <div className="w-[80vw] px-10 pt-10 grid grid-cols-6">
                     <b className=" w-fit">Image</b>
@@ -35,18 +35,19 @@ const List = ()=>{
                     <b className="w-fit ">Price</b>
                     <b className="w-fit">Action</b>
                 </div>
-                    <hr className="border-2 w-[80vw] border-slate-300"/>
+                    <hr className="border-2 w-[80vw] "/>
                 {/* ---------- list items ---------- */}
                
                 {
                     list.map((elem,index)=>
-                    <div key={index} className="w-[80vw] p-10  grid grid-cols-6">
+                    <div key={index} className=" relative w-[80vw] p-10  grid grid-cols-6">
                         <img src={`${URL}/images/${elem.image}`} alt="img" className="w-16"/>
                         <p>{elem.name}</p>
                         <p>{elem.description}</p>
                         <p>{elem.category}</p>
                         <p>{elem.price}</p>
                         <p>x</p>
+                        <hr className="absolute border-2 w-[80vw] border-slate-200 "/>
                 </div>
                     )
                 }
