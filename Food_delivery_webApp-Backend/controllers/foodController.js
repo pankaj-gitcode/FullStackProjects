@@ -26,7 +26,9 @@ const addFood = async(req, res)=>{
             category,
             image:imageFile
         })
-        res.status(200).json({msg: `${name} has been uploaded successfully!!`})
+        res.status(200).json({
+            success: true,
+            data: `${name} added successfully!!`})
     }
     catch(err){
         console.error(`ERROR:/foodController: ${err.message}`);
@@ -39,7 +41,7 @@ const listFood = async (req, res)=>{
    try{
 
     const readList = await foodModel.find({})
-    res.status(200).json({data: readList})
+    res.status(200).json({success:true, data: readList})
    }
    catch(err){
     console.error(`ERROR: READ-FOOD-LIST: ${readList}`)
