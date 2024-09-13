@@ -6,7 +6,7 @@ const userRouter = express.Router();
 
 
 //login & register routes
-app.post('/login', loginUser);
-app.post('/register', registerUser);
+userRouter.post('/login', loginUser);
+userRouter.post('/register', registerUser);
 
 export default userRouter;

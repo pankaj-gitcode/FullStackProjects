@@ -1,7 +1,7 @@
 import validator from "validator";
-import userModel from "../models/userModel";
+import userModel from "../models/userModel.js";
 import bcrypt from 'bcrypt'
-import { jwt } from "jsonwebtoken";
+import jwt  from "jsonwebtoken";
 
 
 
@@ -46,28 +46,29 @@ const createToken = (id)=>{
 // --------------- userSignUP -----------------
 const registerUser = async (req, res)=>{
     const {name,email,password} = req.body;
+    
 
     try{
 
-        //find if entered email already exisit
-        const emailExist = await userModel.findOne({email});
-        if(emailExist){res.status(301).json({success:false, message:"User already exist!"})}
-
         //validate the email str.
         if(!validator.isEmail(email)){
-            res.status(403).json({success:false, message:"Invalid Email!"})
+            return res.status(400).json({success:false, message:"Invalid Email!"})
         }
+        //find if entered email already exisit
+        const emailExist = await userModel.findOne({ email });
+        if(emailExist){return res.status(409).json({success:false, message:"User already exist!"}); }
+
 
         //password-length check
         if(password.length < 8){
-            res.status(402).json({success:false, message:"Enter a string password"})
+            return res.status(400).json({success:false, message:"Enter a strong password"})
         }
 
-        //now if email also unique, email is valid and password is also > 8, then create user with 'hashed-password'
+        //now if email unique, email is valid and password is also > 8, then create user with 'hashed-password'
 
         // generate salt for hash
         const salt = await bcrypt.genSalt(10);
-        //genrate hash
+        //generate hash
         const hashedPassword = await bcrypt.hash(password, salt);
 
         // create db
@@ -83,9 +84,9 @@ const registerUser = async (req, res)=>{
         
     }
     catch(err){
-        res.status(404).json({
+        res.status(500).json({
             success: false,
-            message: "Error in user Signup"
+            message: `ERROR-SIGNUP: ${err.message}`
         })
     }
 
