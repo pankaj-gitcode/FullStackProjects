@@ -1,24 +1,36 @@
 import React, { useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { allIconsAtom, loginAtom } from '../atom';
+import { allIconsAtom, dataAtom, loginAtom } from '../atom';
 
 export default function LoginPopup(){
     const exit = useRecoilValue(allIconsAtom);
     const [login,setLogin] = useRecoilState(loginAtom);
     const [currentState, setCurrentState] = useState("SignUp");
+    const [data, setData] = useRecoilState(dataAtom);
 
+
+    // inputHandler: to update the local DB/Object
+    const onChangeHandler = (event)=>{
+        const name = event.target.name;
+        const value = event.target.value;
+
+        setData(data=>({
+            ...data, [name]:value
+        }))
+    }
 
     return(<>
-        <div>
+    <div>
 
-         <form className="bg-[#fff] flex flex-col place-items-between px-10 py-2 w-fit rounded-lg overflow-hidden shadow-[2px_2px_6px_2px_rgba(0,0,0,0.6)]">
+        <form className="bg-[#fff] flex flex-col place-items-between px-10 py-2 w-fit rounded-lg overflow-hidden shadow-[2px_2px_6px_2px_rgba(0,0,0,0.6)]">
 
                 {/* ---------- page title + Exit ----------- */}
                 <div className="flex justify-between items-center pb-5 cursor-pointer active">
                     <h1 className="font-bold text-2xl md:text-3xl lg:text-2xl">{currentState}</h1>
                     <img src={exit.cross_icon} alt="exit" className="w-3 h-3 " onClick={()=>setLogin(false)}/>
                 </div>
-            {
+                {/* ---------------------- SignUp -------------------- */}
+            {               
                 currentState==="SignUp"?<div >
 
             <div className="grid gap-3 pt-2">
@@ -50,7 +62,6 @@ export default function LoginPopup(){
                         <input type="password" placeholder="Enter password" className="border-[2px] border-slate-200 text-2xl lg:text-sm rounded-md focus:outline-none pl-2" required/>
 
                         <div className="pt-2">
-
                             <p className="text-2xl lg:text-sm bg-orange-600 rounded-sm text-center cursor-pointer active:scale-105 transition-[300] ease-in-out py-1">Submit</p>
                         </div>
                     </div>
@@ -60,8 +71,8 @@ export default function LoginPopup(){
                 </div>
             }
 
-         </form>
+        </form>
 
-         </div>
+    </div>
     </>)
 }

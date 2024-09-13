@@ -107,6 +107,15 @@ export const totalCartPriceAtom = atom({
     default: 0
 })
 
+// ------------ signUp local Object -------------
+export const dataAtom = atom({
+    key: 'dataAtom',
+    default: {
+        name:'',
+        email:'',
+        password: ''
+    }
+})
 
 
 // ***************************************************************

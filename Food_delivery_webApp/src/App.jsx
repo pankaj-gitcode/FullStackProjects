@@ -18,7 +18,7 @@ export default function App(){
   
   return(<div className="relative">
     
-      <Suspense loading={<h5>Loading...</h5>}>
+      <Suspense fallback={<h5>Loading...</h5>}>
           {/* ---------- SignIn button clicked,triggers setLogin in <Navbar/> as true results login=true renders login page-------- */}
           {
             login?<div className="fixed bg-black/50 h-[100vh] w-[100vw] grid place-items-center z-50">
