@@ -39,7 +39,7 @@ export default function LoginPopup(){
     
                 // store in Local Storage
                 localStorage.setItem('Token', token);
-                console.log("TOKEN: ", [token, response.data]);
+                // console.log("TOKEN: ", [token, response.data]);
             }
             else{console.log("ERROR: ", response.data.message)}
 
