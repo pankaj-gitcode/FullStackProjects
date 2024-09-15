@@ -117,6 +117,17 @@ export const dataAtom = atom({
     }
 })
 
+// ----------- URL -----------
+export const URLAtom = atom({
+    key:'URLAtom',
+    default:'http://localhost:3000/api/user'
+})
+// --------- TOKEN -----------
+export const tokenAtom = atom({
+    key: 'tokenAtom',
+    default: ''
+})
+
 
 // ***************************************************************
 

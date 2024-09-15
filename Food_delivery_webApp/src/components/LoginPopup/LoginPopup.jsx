@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { allIconsAtom, dataAtom, loginAtom } from '../atom';
+import { allIconsAtom, dataAtom, loginAtom, tokenAtom, URLAtom } from '../atom';
 import axios from 'axios';
 
 export default function LoginPopup(){
@@ -8,11 +8,53 @@ export default function LoginPopup(){
     const [login,setLogin] = useRecoilState(loginAtom);
     const [currentState, setCurrentState] = useState("SignUp");
     const [data, setData] = useRecoilState(dataAtom);
+    const URL = useRecoilValue(URLAtom);
+    const [token, setToken] = useRecoilState(tokenAtom);
 
+    // handle input values
+    const dataHandler = (event)=>{
+        const name = event.target.name;
+        const value = event.target.value;
+        // reset the local Object
+        setData(data=>({
+            ...data,[name]:value
+        }))
+    }
+    console.log(token)
+    //on submit handler
+    const submitHandler = async (event)=>{
+        // prevent from SignUp/Login card reload
+        event.preventDefault();
+       
+        try{
+            //change URL as per the currentState
+            let newURL = URL;
+            currentState==='SignUp'?newURL += '/register' : newURL += '/login'
+    
+            //fetch the API
+            const response = await axios.post(newURL, data);
+    
+            if(response.data.success){
+                setToken(response.data.message);
+    
+                // store in Local Storage
+                localStorage.setItem('Token', token);
+                console.log("TOKEN: ", token, response.data);
+            }
+            else{console.log("ERROR: ", response.data.message)}
+
+        }
+        catch(err){console.error("ERR: ", err.message)}
+
+    }
+
+   
+
+   
 
     return(<>
         <div className="h-fit p-5 bg-[#fff] rounded-lg shadow-[2px_2px_8px_2px_rgba(0,0,0,0.6)]">
-            <form >
+            <form onSubmit={submitHandler}>
                 <div className='w-[50vw] lg:w-[20vw]'>
 
                     {/* ----------- heading + close icon ---------- */}
@@ -24,14 +66,14 @@ export default function LoginPopup(){
                     {/* ------------- inputs: name,email, password ------------- */}
                     <div className='flex flex-col gap-4 mb-5'>
                         { currentState==='SignUp'?
-                        <input type='text' placeholder='Your name' className="text-lg lg:text-sm  pl-2 py-1 border-2 rounded-md focus:outline-none" required/>:<></> }
-                        <input type="email" placeholder='Your email' className="text-lg lg:text-sm  pl-2 py-1 border-2 rounded-md focus:outline-none" required/>
-                        <input type="password" placeholder='Your password' className="text-lg lg:text-sm  pl-2 py-1 border-2 rounded-md focus:outline-none" required/>
+                        <input type='text' placeholder='Your name' name='name' value={data.name} onChange={dataHandler} className="text-lg lg:text-sm pl-2 py-1 border-2 rounded-md focus:outline-none" required/>:<></> }
+                        <input type="email" placeholder='Your email' name='email' value={data.email} onChange={dataHandler} className="text-lg lg:text-sm pl-2 py-1 border-2 rounded-md focus:outline-none" required/>
+                        <input type="password" placeholder='Your password' name='password' value={data.password} onChange={dataHandler} className="text-lg lg:text-sm pl-2 py-1 border-2 rounded-md focus:outline-none" required/>
                     </div>
 
                     {/* ---------------- buttons:Signup/Login ----------------- */}
                     <div>
-                        <button className="bg-orange-600 w-full rounded-sm p-1 mb-5 text-lg lg:text-sm text-[#fff] active:scale-95 duration-300 ease-in-out">
+                        <button type='submit' className="bg-orange-600 w-full rounded-sm p-1 mb-5 text-lg lg:text-sm text-[#fff] active:scale-95 duration-300 ease-in-out">
                             {
                                 currentState === 'SignUp'?<span>Create account</span>:<span>Login</span>
                             }
