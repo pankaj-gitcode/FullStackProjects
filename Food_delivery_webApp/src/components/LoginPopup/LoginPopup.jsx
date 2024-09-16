@@ -13,44 +13,43 @@ export default function LoginPopup(){
 
     // handle input values
     const dataHandler = (event)=>{
+        // grab the input data from the user
         const name = event.target.name;
         const value = event.target.value;
-        // reset the local Object
-        setData(data=>({
-            ...data,[name]:value
-        }))
+        // update the data
+        setData(data=>({...data,[name]:value}))
     }
-    console.log(token)
-    //on submit handler
-    const submitHandler = async (event)=>{
-        // prevent from SignUp/Login card reload
+
+    //handle on Submit function
+    const submitHandler = async(event)=>{
+        //prevent from reload login/SignUp card
         event.preventDefault();
-       
-        try{
-            //change URL as per the currentState
-            let newURL = URL;
-            currentState==='SignUp'?newURL += '/register' : newURL += '/login'
     
-            //fetch the API
+        try{
+            let newURL = URL;
+            currentState === 'SignUp'? newURL += '/register' : newURL += '/login';
+            
+            // fetch the API and store user's data to DB
             const response = await axios.post(newURL, data);
     
-            if(response.data.success){
-                setToken(response.data.message);
-    
-                // store in Local Storage
-                localStorage.setItem('Token', token);
-                // console.log("TOKEN: ", [token, response.data]);
+            // set Token in localStorage if response is true
+            if(response.data.success) {
+                    // update the TOKEN
+                setToken(response.data.message)
+
+                // set item to LocalStorage
+                localStorage.setItem("Token", token)
+                console.log("[TOKEN,DATA]: ", [token, data, response.data.message]);
+
+                // SignIn card should be closed
+                setLogin(false)
             }
-            else{console.log("ERROR: ", response.data.message)}
 
         }
-        catch(err){console.error("ERR: ", err.message)}
-
+        catch(err){ console.error("ERR: ", err.message)}
     }
 
-   
 
-   
 
     return(<>
         <div className="h-fit p-5 bg-[#fff] rounded-lg shadow-[2px_2px_8px_2px_rgba(0,0,0,0.6)]">
