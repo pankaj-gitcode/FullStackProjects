@@ -1,7 +1,7 @@
-import React from 'react'
-import { assets } from '../assets/assets'
+import React, { useState } from 'react'
+// import { assets } from '../assets/assets'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { loginAtom, menuAtom, totalCartPriceAtom } from './atom';
+import { allIconsAtom, loginAtom, menuAtom, tokenAtom, totalCartPriceAtom } from './atom';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -10,7 +10,9 @@ export default function Navbar(){
     const [login, setLogin] = useRecoilState(loginAtom);   
     const navigateTo = useNavigate();
     const cartBlinking = useRecoilValue(totalCartPriceAtom);
-
+    const [assets, setAssets] = useRecoilState(allIconsAtom);
+    const token = useRecoilValue(tokenAtom);
+    const [display, setDisplay] = useState('hidden')
 
     return(<>
         <nav>
@@ -42,11 +44,24 @@ export default function Navbar(){
                         }
                     </div>
                             {/* ------------------- SIgnIn BUtton -------------- */}
-                     {/* setLogin prop set to 'true' if clicked on SignIn button & LoginPage display, value passed to App.jsx useState */}
-                    <button 
+                     
+                        {/* setLogin prop set to 'true' if clicked on SignIn button & LoginPage display, value passed to App.jsx useState */}
+                    {
+                        !token?
+                        <button 
                     className="border-2 rounded-[300px] border-orange-600 px-6 py-1 text-[#49557e] text-[16px] bg-transparent active:scale-105" 
                     onClick={()=>setLogin(true)}
                     >SignIn</button>
+                    :
+                    <div>
+                        <img src={assets.profile_icon} alt="profileIcon" onMouseEnter={()=>setDisplay('block')} onMouseLeave={()=>setDisplay('hidden')}/>
+                        <ul className={display}>
+                            <li><img src={assets.bag_icon} alt="order" /></li>
+                            <li><img src={assets.logout_icon} alt="logout" /></li>
+                        </ul>
+                    </div>
+                    }
+
                 </div>
             </div>
 
