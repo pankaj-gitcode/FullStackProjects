@@ -60,9 +60,10 @@ export default function Navbar(){
                         :
                         <div className='relative'>
                             <img src={assets.profile_icon} alt="profileIcon" onClick={dropDownDisplay} className='cursor-pointer'/>
-                            <ul className={`absolute z-10 ${display?'flex flex-col gap-2':'hidden'} bg-slate-200 w-20`}>
-                                <li><img src={assets.bag_icon} alt="order" /></li>
-                                <li><img src={assets.logout_icon} alt="logout" /></li>
+                            <ul className={`absolute z-10 ${display?'flex flex-col gap-2':'hidden'} w-10 bg-[#fff] rounded-sm shadow-[2px_2px_6px_2px_rgba(0,0,0,0.1)]`}>
+                                <li className='p-2 cursor-pointer '><img src={assets.bag_icon} alt="order" /></li>
+                                <hr/>
+                                <li className='p-2 cursor-pointer'><img src={assets.logout_icon} alt="logout" /></li>
                             </ul>
                         </div>
                         }
