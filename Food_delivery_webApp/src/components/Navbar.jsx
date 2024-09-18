@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 // import { assets } from '../assets/assets'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { allIconsAtom, loginAtom, menuAtom, tokenAtom, totalCartPriceAtom } from './atom';
+import { allIconsAtom, loginAtom, menuAtom, profileDisplayAtom, tokenAtom, totalCartPriceAtom } from './atom';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -12,11 +12,15 @@ export default function Navbar(){
     const cartBlinking = useRecoilValue(totalCartPriceAtom);
     const [assets, setAssets] = useRecoilState(allIconsAtom);
     const token = useRecoilValue(tokenAtom);
-    const [display, setDisplay] = useState('hidden')
+    const [display, setDisplay] =useRecoilState(profileDisplayAtom);
+
+       const dropDownDisplay = ()=>{ setDisplay(!display) }
+
+        console.log("display: ",display)
 
     return(<>
-        <nav>
-            <div className="flex justify-between pt-6 " id="nav">
+        <nav >
+            <div className="flex justify-between pt-6 " id="nav" >
                     {/* ----------- brand Logo -------------- */}
               <img src={assets.foodflixlogo} alt="food" className="w-36 h-12 sm:text-lg lg:text-xl cursor-pointer" onClick={()=>navigateTo('/')}/>
                 
@@ -44,23 +48,25 @@ export default function Navbar(){
                         }
                     </div>
                             {/* ------------------- SIgnIn BUtton -------------- */}
-                     
-                        {/* setLogin prop set to 'true' if clicked on SignIn button & LoginPage display, value passed to App.jsx useState */}
-                    {
-                        !token?
-                        <button 
-                    className="border-2 rounded-[300px] border-orange-600 px-6 py-1 text-[#49557e] text-[16px] bg-transparent active:scale-105" 
-                    onClick={()=>setLogin(true)}
-                    >SignIn</button>
-                    :
                     <div>
-                        <img src={assets.profile_icon} alt="profileIcon" onMouseEnter={()=>setDisplay('block')} onMouseLeave={()=>setDisplay('hidden')}/>
-                        <ul className={display}>
-                            <li><img src={assets.bag_icon} alt="order" /></li>
-                            <li><img src={assets.logout_icon} alt="logout" /></li>
-                        </ul>
-                    </div>
-                    }
+
+                        {/* setLogin prop set to 'true' if clicked on SignIn button & LoginPage display, value passed to App.jsx useState */}
+                        {
+                            !token?
+                            <button 
+                        className="border-2 rounded-[300px] border-orange-600 px-6 py-1 text-[#49557e] text-[16px] bg-transparent active:scale-105" 
+                        onClick={()=>setLogin(true)}
+                        >SignIn</button>
+                        :
+                        <div className='relative'>
+                            <img src={assets.profile_icon} alt="profileIcon" onClick={dropDownDisplay} className='cursor-pointer'/>
+                            <ul className={`absolute z-10 ${display?'flex flex-col gap-2':'hidden'} bg-slate-200 w-20`}>
+                                <li><img src={assets.bag_icon} alt="order" /></li>
+                                <li><img src={assets.logout_icon} alt="logout" /></li>
+                            </ul>
+                        </div>
+                        }
+                    </div> 
 
                 </div>
             </div>

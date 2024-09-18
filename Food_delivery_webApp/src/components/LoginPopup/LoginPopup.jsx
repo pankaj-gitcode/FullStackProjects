@@ -10,6 +10,7 @@ export default function LoginPopup(){
     const [data, setData] = useRecoilState(dataAtom);
     const URL = useRecoilValue(URLAtom);
     const [token, setToken] = useRecoilState(tokenAtom);
+    
 
     // handle input values
     const dataHandler = (event)=>{

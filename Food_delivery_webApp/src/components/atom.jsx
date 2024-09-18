@@ -128,6 +128,12 @@ export const tokenAtom = atom({
     default: ''
 })
 
+// ---------- PROFILE DISPLAY ----------
+export const profileDisplayAtom = atom({
+    key: 'profileDisplayAtom',
+    default: false
+})
+
 
 // ***************************************************************
 
