@@ -36,10 +36,11 @@ export default function LoginPopup(){
             // set Token in localStorage if response is true
             if(response.data.success) {
                     // update the TOKEN
-                setToken(response.data.message)
+                const token = response.data.message; //getting token directly from the response.data🚩
+                setToken(token)
 
                 // set item to LocalStorage
-                localStorage.setItem("Token", token)
+                localStorage.setItem("token", token)
                 console.log("[TOKEN,DATA]: ", [token, data, response.data.message]);
 
                 // SignIn card should be closed

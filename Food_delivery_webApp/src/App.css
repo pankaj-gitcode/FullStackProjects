@@ -15,6 +15,33 @@
 .fade-in{
   animation: fadeIn .9s ease-in-out;
 }
+/* --------- Profile | Order & Logout Icon --------- */
+#assetImage{
+   position:relative;
+}
+#logout{
+  /* background-color: aquamarine; */
+  /* width:8vw; */
+  display:none;
+  position: absolute;
+  z-index:1;
+  left:0px;
+}
+
+#assetImage:hover #logout{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+  /* background-color: #fff2ef; */
+  align-items: center;
+  justify-content:center;
+  /* border: 2px solid tomato; */
+  outline:2px double #fff;
+  
+
+}
+
+
 
 
 

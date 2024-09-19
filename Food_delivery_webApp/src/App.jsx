@@ -2,7 +2,7 @@ import React, { lazy, Suspense} from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './index.css'
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { loginAtom, profileDisplayAtom } from './components/atom.jsx';
+import { loginAtom} from './components/atom.jsx';
 import LoginPopup from './components/LoginPopup/LoginPopup.jsx';
 
 
@@ -15,7 +15,7 @@ const Footer = lazy(()=>import('./components/Footer/Footer.jsx'));
 
 export default function App(){
   const login = useRecoilValue(loginAtom);
-  const [display, setDisplay] = useRecoilState(profileDisplayAtom);
+  
   
   return(<div className="relative">
     

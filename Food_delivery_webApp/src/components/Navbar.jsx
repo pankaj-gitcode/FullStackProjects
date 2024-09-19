@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { assets } from '../assets/assets'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { allIconsAtom, loginAtom, menuAtom, profileDisplayAtom, tokenAtom, totalCartPriceAtom } from './atom';
+import { allIconsAtom, loginAtom, menuAtom,  tokenAtom, totalCartPriceAtom } from './atom';
 import { Link, useNavigate } from 'react-router-dom';
+import '../App.css'
 
 
 export default function Navbar(){
@@ -11,15 +12,27 @@ export default function Navbar(){
     const navigateTo = useNavigate();
     const cartBlinking = useRecoilValue(totalCartPriceAtom);
     const [assets, setAssets] = useRecoilState(allIconsAtom);
-    const token = useRecoilValue(tokenAtom);
-    const [display, setDisplay] =useRecoilState(profileDisplayAtom);
+    const [token,setToken] = useRecoilState(tokenAtom);
+    const navigateToRoot = useNavigate();
 
-       const dropDownDisplay = ()=>{ setDisplay(!display) }
+    
+    const logoutHandler = ()=>{
+        localStorage.removeItem('token');
+        setToken('');
+        navigateToRoot('/');
+    }
 
-        console.log("display: ",display)
+    useEffect(()=>{
+        // check if Token still 
+        if(localStorage.getItem('token')){
+            setToken(localStorage.getItem('token'));
+        }
+        console.log("TTOOOKKKEENN: ", token)
+        setTimeout(()=>{console.log("TOKKEEN: ", token)}, 3000);
+    }, [])
 
     return(<>
-        <nav >
+        <nav>
             <div className="flex justify-between pt-6 " id="nav" >
                     {/* ----------- brand Logo -------------- */}
               <img src={assets.foodflixlogo} alt="food" className="w-36 h-12 sm:text-lg lg:text-xl cursor-pointer" onClick={()=>navigateTo('/')}/>
@@ -58,12 +71,15 @@ export default function Navbar(){
                         onClick={()=>setLogin(true)}
                         >SignIn</button>
                         :
-                        <div className='relative'>
-                            <img src={assets.profile_icon} alt="profileIcon" onClick={dropDownDisplay} className='cursor-pointer'/>
-                            <ul className={`absolute z-10 ${display?'flex flex-col gap-2':'hidden'} w-10 bg-[#fff] rounded-sm shadow-[2px_2px_6px_2px_rgba(0,0,0,0.1)]`}>
-                                <li className='p-2 cursor-pointer '><img src={assets.bag_icon} alt="order" /></li>
-                                <hr/>
-                                <li className='p-2 cursor-pointer'><img src={assets.logout_icon} alt="logout" /></li>
+                        <div id='assetImage' className=' bg-red-500' >
+                                        {/* ---------- PROFILE ICON -------- */}
+                            <img src={assets.profile_icon} alt="profileIcon"  className='cursor-pointer' />
+                            <ul id='logout' className='w-fit lg:w-[8vw] rounded-sm shadow-[2px_2px_5px_2px_rgba(0,0,0,0.5)] bg-[#fff]' >
+                                        {/* ---------- ORDER ICON -------- */}
+                                <li className='w-fit lg:w-[8vw] px-2 py-1 flex flex-col lg:flex-row gap-2 cursor-pointer hover:bg-slate-300'><img src={assets.bag_icon} alt="order" className='w-6' />Order</li>
+                                <hr className='w-10  border-slate-300 border-solid'/>
+                                        {/* --------- LOGOUT ICON ------- */}
+                                <li onClick={logoutHandler} className='w-fit lg:w-[8vw] px-2 py-1 flex flex-col lg:flex-row gap-2 cursor-pointer hover:bg-slate-300'><img src={assets.logout_icon} alt="logout" className='w-6' />Logout</li>
                             </ul>
                         </div>
                         }
