@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { countItemsAtom, foodItemsAtom, totalCartPriceAtom } from "../../atom";
+import { countItemsAtom, foodItemsAPIAtom, foodItemsAtom, totalCartPriceAtom } from "../../atom";
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
-  const foodItem = useRecoilValue(foodItemsAtom());
+  // const foodItem = useRecoilValue(foodItemsAtom());
+  const foodItem = useRecoilValue(foodItemsAPIAtom());
   // const countItems = useRecoilValue(countItemsAtom);
   const [countItems, setCountItems] = useRecoilState(countItemsAtom);
   const [totalCartPrice, setTotalCartPrice] =useRecoilState(totalCartPriceAtom);
@@ -47,7 +48,7 @@ export default function Cart() {
             <p>Remove</p>
           </div>
           <div className="pt-6 ">
-            {foodItem.map((elem, index) => {
+            {foodItem.data.map((elem, index) => {
               {
                 /* check if elem._id is the id in object countItems */
               }
@@ -58,7 +59,7 @@ export default function Cart() {
                     className="grid grid-cols-6 items-center text-sm gap-5 lg:gap-0 "
                   >
                     <img
-                      src={elem.image}
+                      src={`http://localhost:3000/images/${elem.image}`}
                       alt=""
                       className="size-20 object-contain "
                     />

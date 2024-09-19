@@ -27,7 +27,7 @@ export default function Navbar(){
         if(localStorage.getItem('token')){
             setToken(localStorage.getItem('token'));
         }
-        console.log("TTOOOKKKEENN: ", token)
+        
         setTimeout(()=>{console.log("TOKKEEN: ", token)}, 3000);
     }, [])
 

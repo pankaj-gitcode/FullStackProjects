@@ -1,17 +1,19 @@
 
 import React, { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { addRemoveIconsAtom,  categoryAtom,  countItemsAtom,  foodItemsAtom , ratingsAtom } from '../atom';
+import { addRemoveIconsAtom,  categoryAtom,  countItemsAtom,  foodItemsAPIAtom,  foodItemsAtom , ratingsAtom } from '../atom';
 
 export default function FoodItem(){
     const foodItem = useRecoilValue(foodItemsAtom());
+    const foodItemAPI = useRecoilValue(foodItemsAPIAtom());
     const ratings = useRecoilValue(ratingsAtom);
     const [count, setCount] = useRecoilState(countItemsAtom);
     const addRemoveIcons = useRecoilValue(addRemoveIconsAtom);
     const category = useRecoilValue(categoryAtom);
     const [categorisedFood, setCategorisedFood] = useState([])
     
-    
+    console.log("API-FOODITEM: ",foodItemAPI)
+    foodItemAPI.data.forEach(elem=>console.log("WORKING: ",elem))
     // ------------- when +icon clicked ---------------
   
     const clickHandleAdd = (id)=>{
@@ -34,9 +36,9 @@ export default function FoodItem(){
     // console.log(count)
 
     useEffect(()=>{
-        if(category === 'All'){setCategorisedFood(foodItem)}
+        if(category === 'All'){setCategorisedFood(foodItemAPI.data)}
         else{
-            setCategorisedFood(foodItem.filter(elem=>elem.category === category))
+            setCategorisedFood(foodItemAPI.data.filter(elem=>elem.category === category))
         }
     }, [category])
 
@@ -53,7 +55,7 @@ export default function FoodItem(){
                       <p></p>
                                     {/* ----------- Image div ----------- */}
                         <div className="relative rounded-xl">
-                            <img src={elem.image} alt={elem._id} className=" rounded-t-xl hover:scale-105 duration-500  hover:border-[#E85F22] "/>
+                            <img src={`http://localhost:3000/images/${elem.image}`} alt={elem._id} className=" rounded-t-xl hover:scale-105 duration-500  hover:border-[#E85F22] "/>
 
                                     {/* --------------- Add/Remove icons ---------- */}
                             <div className="h-fit w-11 absolute bottom-0 right-28 sm:right-20 md:right-6 xl:right-10 ">

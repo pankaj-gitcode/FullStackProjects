@@ -1,5 +1,6 @@
 import { atom, atomFamily, selector, selectorFamily } from "recoil";
 import { assets, food_list } from "../assets/assets";
+import axios from "axios";
 
 
 
@@ -64,7 +65,13 @@ export const foodItemsAtom = selectorFamily({
         return food_list.map(elem=>elem)
     }
 })
-
+export const foodItemsAPIAtom = selectorFamily({
+    key: 'foodItemsAPIAtom',
+    get:()=>async({get})=>{
+        const response = await axios.get('http://localhost:3000/api/food/list')
+        return response.data
+    }
+})
 // -------- Ratings ------
 export const ratingsAtom = atom({
     key: 'ratingsAtom',
