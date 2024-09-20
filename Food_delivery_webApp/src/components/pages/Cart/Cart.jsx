@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { countItemsAtom, foodItemsAPIAtom, foodItemsAtom, totalCartPriceAtom } from "../../atom";
+import {
+  countItemsAtom,
+  foodItemsAPIAtom,
+  foodItemsAtom,
+  totalCartPriceAtom,
+} from "../../atom";
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
@@ -8,10 +13,12 @@ export default function Cart() {
   const foodItem = useRecoilValue(foodItemsAPIAtom());
   // const countItems = useRecoilValue(countItemsAtom);
   const [countItems, setCountItems] = useRecoilState(countItemsAtom);
-  const [totalCartPrice, setTotalCartPrice] =useRecoilState(totalCartPriceAtom);
+  const [totalCartPrice, setTotalCartPrice] =
+    useRecoilState(totalCartPriceAtom);
 
   const navigateTo = useNavigate();
 
+  // ------- ITEMS ADDED/REMOVED ---------
   console.log("cont: ", countItems);
   const clickHandleAdd = (id) => {
     setCountItems((prevCount) => {
@@ -19,7 +26,6 @@ export default function Cart() {
       return currentCount;
     });
   };
-
   const clickHandleSub = (id) => {
     setCountItems((prevCount) => {
       const newCount = { ...prevCount, [id]: Math.max(prevCount[id] - 1, 0) };
@@ -27,7 +33,8 @@ export default function Cart() {
       return newCount;
     });
   };
-
+      // --------- PRICE -----------
+  // all price getting accumulated in Array, pushed inside it got the consolidated price with exact count
   let priceArray = [];
   useEffect(() => {
     setTotalCartPrice(priceArray.reduce((accum, elem) => accum + elem, 0));
