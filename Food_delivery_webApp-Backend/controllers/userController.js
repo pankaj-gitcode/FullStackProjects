@@ -12,13 +12,16 @@ const loginUser = async(req, res)=>{
     try{
         //check if email exisit in db
         const user = await userModel.findOne({email})
+        if(!user){
+            return res.status(403).json({success:false, message:"Invalid username"})
+        }
 
         //check if password matched
         const isMatch = await bcrypt.compare(password, user.password);
 
         //display for Invalid cedentials
-        if (!user || !isMatch){
-           res.status(404).json({
+        if (!isMatch){
+           return res.status(404).json({
             success: false,
             message: "Invalid credentials"
            })
@@ -27,20 +30,20 @@ const loginUser = async(req, res)=>{
         //if all looks good display TOKEN
         const token = createToken(user._id);
         res.status(200).json({
-            success: false,
+            success: true,
             message: token 
         })
     }
     catch(err){
-        res.status(404).json({success:false, message:"Login Error"})
+        res.status(404).json({success:false, message:`ERROR-LOGIN: ${err.message}`})
     }
 
 };
 
 // ------------- TOKEN function -----------------
 const createToken = (id)=>{
-    const token = jwt.sign(id, process.env.JWT_SECRET);
-    return token;
+    const secretToken = jwt.sign({id}, process.env.JWT_SECRET);
+    return secretToken;
 }
 
 // --------------- userSignUP -----------------

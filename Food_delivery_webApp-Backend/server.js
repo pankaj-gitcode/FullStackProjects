@@ -4,6 +4,7 @@ import { connectToDB } from './config/db.js';
 import foodRequester from './routes/foodRoute.js';
 import userRouter from './routes/userRoute.js';
 import "dotenv/config"
+import cartRouter from './routes/cartRoute.js';
 
 const app = express();
 
@@ -16,16 +17,20 @@ connectToDB();
 app.use(express.json());
 app.use(cors());
 
-//API endpoint: for router: foodRequester
+// --------------- API ENDPOINT ----------
+// food item
 app.use('/api/food', foodRequester);
 
-//API endpoint: to view particular file:here upload
+// to view particular file:here upload
 app.use('/images', express.static('./uploads'));
 
-//API endpoint: userRouter
+// user Router
 app.use('/api/user', userRouter);
 
+// cart router
+app.use('/api/cart', cartRouter);
 
+// just to check - not needed!
 app.get('/', (req,res)=>{
     res.status(200).json({msg: "WORKING..."})
 })
