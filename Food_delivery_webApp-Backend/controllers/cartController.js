@@ -1,8 +1,10 @@
-
+import userModel from "../models/userModel"
 
 // add food items to cart
 
-const addToCart = (req, res)=>{} 
+const addToCart = (req, res)=>{
+   
+} 
 
 // remove food Items form cart
 

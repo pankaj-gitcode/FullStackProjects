@@ -10,13 +10,13 @@ const loginUser = async(req, res)=>{
     const {email, password} = req.body;
 
     try{
-        //check if email exisit in db
+        //check if 'email' exisit in db
         const user = await userModel.findOne({email})
         if(!user){
             return res.status(403).json({success:false, message:"Invalid username"})
         }
 
-        //check if password matched
+        //check if 'password' matched
         const isMatch = await bcrypt.compare(password, user.password);
 
         //display for Invalid cedentials
@@ -57,17 +57,17 @@ const registerUser = async (req, res)=>{
         if(!validator.isEmail(email)){
             return res.status(400).json({success:false, message:"Invalid Email!"})
         }
-        //find if entered email already exisit
+        // find if entered email already exist
         const emailExist = await userModel.findOne({ email });
         if(emailExist){return res.status(409).json({success:false, message:"User already exist!"}); }
 
 
-        //password-length check
+        // password-length check
         if(password.length < 8){
             return res.status(400).json({success:false, message:"Enter a strong password"})
         }
 
-        //now if email unique, email is valid and password is also > 8, then create user with 'hashed-password'
+        //now if email is unique, email is valid and password is also > 8, then create user with 'hashed-password'
 
         // generate salt for hash
         const salt = await bcrypt.genSalt(10);
