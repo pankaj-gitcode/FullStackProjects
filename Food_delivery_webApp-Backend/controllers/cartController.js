@@ -3,8 +3,9 @@ import userModel from "../models/userModel"
 // add food items to cart
 
 const addToCart = async (req, res)=>{
-   const userID = req.body.userId
-   const userId = await userModel.findOne({id: userId}) ;
+   const userId = req.body.userId;
+   const itemId = req.body.itemId;
+   const userData = await userModel.findOne({id: userId}) ;
 
 } 
 
