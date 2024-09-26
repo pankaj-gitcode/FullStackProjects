@@ -5,8 +5,11 @@ import userModel from "../models/userModel"
 const addToCart = async (req, res)=>{
    const userId = req.body.userId;
    const itemId = req.body.itemId;
-   const userData = await userModel.findOne({id: userId}) ;
 
+   // Sign-In the specific user account
+   await userModel.findOne({userId});
+
+   //
 } 
 
 // remove food Items form cart
