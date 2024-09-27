@@ -58,15 +58,16 @@ const removeFoodItem = async(req, res)=>{
         console.log("REQ-BODY: ",req.body)
         if(!id){ return res.status(400).json({msg: ``}) }
 
-        //read the foodDetails from the DB
+        // read the foodDetails from the DB
         const food = await foodModel.findById(id);
+        
         //check food Items/details exists
         if(!food){return res.status(404).json({success: false, data:`${food.id} does not exist...`}) }
 
         // delete from the DB by ID
         await foodModel.findByIdAndDelete(id);
 
-        //remove from the './uploads'
+        // remove from the './uploads'
         fs.unlink(`uploads/${food.image}`,(err)=>{
             if(err){console.error(`ERROR-/controller/unlink: ${err.message}`)}
             console.log(`${food.image} has been successfully deleted!`)
