@@ -43,7 +43,7 @@ const removeFromCart = async(req, res)=>{
       // descrease the itemId count for non-empty cartData
       if(cartData[itemId]>0) { cartData[itemId] -= 1; }
 
-      // update the DB
+      // update the DB finding the userId and update the cartData
       await userModel.findByIdAndUpdate(userId, {cartData});
 
       res.status(200).json({success:true, cartData});
