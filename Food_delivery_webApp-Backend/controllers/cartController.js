@@ -11,20 +11,25 @@ const addToCart = async (req, res)=>{
       const userData = await userModel.findOne({_id:userId});
    
       // in this specfic userData we've cart data
-      let cartData = userData.cartData;
-   
+      let cartData = await userData.cartData;
+      console.log("cartData: ", cartData)
+
       // check if any entry in the CartData, add count if empty=>set to 1, if no=>increment to 1
-      if(!cartData[itemId]) { return cartData[itemId] = 1 }
+      if(!cartData[itemId]) { cartData[itemId] = 1; return;}
       cartData[itemId] += 1;
       // return (!cartData[itemId])? cartData[itemId] = 1: cartData[itemData] += 1;
 
       // get the particular user ID and update the cart data
-      await userModel.findByIdandUpdate(userId, {cartData});
+      await userModel.findByIdAndUpdate(userId, {cartData});
 
       res.status(200).json({message:true, data:`'${itemId}' has been added successfully`})
-
+      return;
    }
-   catch(err){ console.error("ERROR-CartController: ", err.message); res.status(404).json({message:false, data:`ERROR-CartController: ${err.message}`}) }
+   catch(err){ 
+      console.error("ERROR-CartController: ", err.message); 
+      res.status(404).json({message:false, data:`ERROR-CartController: ${err.message}`})
+      return;
+    }
 } 
 
 // ------------ remove food Items from cart ----------
@@ -38,7 +43,7 @@ const removeFromCart = async(req, res)=>{
       const userData = await userModel.findById(userId)
       
       // grab the cart data
-      const cartData = userData.cartData;
+      let cartData = await userData.cartData;
 
       // descrease the itemId count for non-empty cartData
       if(cartData[itemId]>0) { cartData[itemId] -= 1; }
@@ -65,12 +70,14 @@ const getFromCart = async(req, res)=>{
       const userId = req.body.userId;
 
       // find loggenIn user 
-      const userData = await userModel.find({_id:userId});
+      const userData = await userModel.findOne({_id:userId});
 
       // extract cartData out of userData
       const cartData = userData.cartData;
 
-      !cartData? res.status(404).json({success:false, data:`cart is Empty!`}):userModel.find({cartData});
+      // !cartData? res.status(404).json({success:false, data:`cart is Empty!`}):userModel.find({cartData});
+      if(!cartData){ return res.status(404).json({success:false, data:"Cart is Empty"}) }
+      await userModel.find({cartData})
       res.status(200).json({
          success: false,
          data: cartData
