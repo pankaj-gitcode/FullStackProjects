@@ -59,7 +59,31 @@ const removeFromCart = async(req, res)=>{
 
 // ----------- list/get all food items from the cart ----------
 
-const getFromCart = (req, res)=>{}
+const getFromCart = async(req, res)=>{
+   try{
+      const itemId = req.body.itemId;
+      const userId = req.body.userId;
+
+      // find loggenIn user 
+      const userData = await userModel.find({_id:userId});
+
+      // extract cartData out of userData
+      const cartData = userData.cartData;
+
+      !cartData? res.status(404).json({success:false, data:`cart is Empty!`}):userModel.find({cartData});
+      res.status(200).json({
+         success: false,
+         data: cartData
+      })
+   }
+   catch(err){
+      console.error()
+      res.status(404).json({
+         success: false,
+         data: `ERROR-Listing-Items: ${err.message}`
+      })
+   }
+}
 
 // export 
 export {addToCart, removeFromCart, getFromCart}
