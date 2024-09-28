@@ -12,8 +12,7 @@ const addToCart = async (req, res)=>{
    
       // in this specfic userData we've cart data
       let cartData = await userData.cartData;
-      console.log("cartData: ", cartData)
-
+      
       // check if any entry in the CartData, add count if empty=>set to 1, if no=>increment to 1
       if(!cartData[itemId]) { cartData[itemId] = 1; return;}
       cartData[itemId] += 1;
@@ -75,7 +74,6 @@ const getFromCart = async(req, res)=>{
       // extract cartData out of userData
       const cartData = userData.cartData;
 
-      // !cartData? res.status(404).json({success:false, data:`cart is Empty!`}):userModel.find({cartData});
       if(!cartData){ return res.status(404).json({success:false, data:"Cart is Empty"}) }
       await userModel.find({cartData})
       res.status(200).json({
