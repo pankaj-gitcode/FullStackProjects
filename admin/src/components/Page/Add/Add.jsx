@@ -64,11 +64,12 @@ const submitHandler = async (e)=>{
                     {/* --------- Upload Image ---------- */}
                     <div className="flex flex-col gap-2 ">
                         <p>Upload image</p>
+
                         <label htmlFor="image">
                             <img src={upload?URL.createObjectURL(upload):assets.upload_area} alt="upload_file" className="cursor-pointer w-32 h-32 object-cover bg-center "/>
                         </label>
                         
-                        <input type="file" id= "image" onChange={(e)=>setUpload(e.target.files[0])}   hidden required/>
+                        <input type="file" id= "image" onChange={(e)=>setUpload(e.target.files[0])} hidden required/>
                     </div>
 
                     {/* --------- Product name ---------- */}
@@ -91,8 +92,8 @@ const submitHandler = async (e)=>{
                             <select name="category" value={data.category} className="text-sm text-[#000]" onChange={clickHandler}>
                                 <option value="Salad">Salad</option>
                                 <option value="Rolls">Rolls</option>
-                                <option value="Sandwhich">Sandwhich</option>
-                                <option value="Icecream">Icecream</option>
+                                <option value="Sandwich">Sandwich</option>
+                                <option value="Deserts">Deserts</option>
                                 <option value="Cake">Cake</option>
                                 <option value="Pure Veg">Pure Veg</option>
                                 <option value="Pasta">Pasta</option>
