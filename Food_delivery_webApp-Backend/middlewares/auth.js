@@ -11,14 +11,14 @@ const userMiddleware = async(req, res, next)=>{
         const decode = jwt.verify(token, process.env.JWT_SECRET)
         req.body.userId = decode.id;
 
-        console.log("DECODER: ", decode)
+        // console.log("DECODER: ", decode)
 
         
-        console.log(`AUTH: ${[token, req.body.userId]}`)
+        // console.log(`AUTH: ${[token, req.body.userId]}`)
         next();
     }
     catch(err){
-        console.error(`ERROR-Auth: ${err.message}`)
+        // console.error(`ERROR-Auth: ${err.message}`)
         res.status(404).json({
             success: false,
             data: `ERROR-Auth: ${err.message}`
