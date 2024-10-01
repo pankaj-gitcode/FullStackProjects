@@ -25,7 +25,7 @@ const addToCart = async (req, res)=>{
       return;
    }
    catch(err){ 
-      console.error("ERROR-CartController: ", err.message); 
+      // console.error("ERROR-CartController: ", err.message); 
       res.status(404).json({message:false, data:`ERROR-CartController: ${err.message}`})
       return;
     }
@@ -53,7 +53,7 @@ const removeFromCart = async(req, res)=>{
       res.status(200).json({success:true, cartData});
    }
    catch(err){
-      console.error("ERROR-RemoveFromCart: ", err.message);
+      // console.error("ERROR-RemoveFromCart: ", err.message);
       res.status(404).json({
          success:false,
          data: `ERROR-RemoveFromCart: ${err.message}`
