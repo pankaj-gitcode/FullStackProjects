@@ -61,7 +61,7 @@ const List = ()=>{
                         <p>{elem.description}</p>
                         <p>{elem.category}</p>
                         <p>{elem.price}</p>
-                        <p className="w-5 h-5 rounded-2xl text-center pb-10 font-smibold text-2xl hover:cursor-pointer active:skew-x-12  shadow-[1px_1px_6px_2px_rgba(0,0,0,0.5)]" 
+                        <p className="w-[1vw] h-[1px] rounded-full text-center pb-10 font-smibold text-2xl hover:cursor-pointer active:skew-x-12  shadow-[1px_1px_6px_2px_rgba(0,0,0,0.5)]" 
                         onClick={()=>removeItem(elem._id)}>x</p>
 
                         <hr className="absolute border-2 w-[80vw] border-slate-200 "/>
