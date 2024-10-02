@@ -28,16 +28,22 @@ export default function Cart() {
     
     setCountItems((prevCount) => {
       const currentCount = { ...prevCount, [itemId]: (prevCount[itemId] || 0) + 1 };
-
+      
       return currentCount;
     });
+    if(token){
+      await axios.post('http://localhost:3000/api/cart/add', {itemId}, {headers:{token}})
+    }
   };
-  const clickHandleSub = (id) => {
+  const clickHandleSub = async(itemId) => {
     setCountItems((prevCount) => {
-      const newCount = { ...prevCount, [id]: Math.max(prevCount[id] - 1, 0) };
-      // delete newCount[id];
+      const newCount = { ...prevCount, [itemId]: Math.max(prevCount[itemId] - 1, 0) };
+      // delete newCount[itemId];
       return newCount;
     });
+    if(token){
+      await axios.post('http://localhost:3000/api/cart/remove', {itemId}, {headers:{token}})
+    }
   };
       // --------- PRICE -----------
   // all price getting accumulated in Array, pushed inside it got the consolidated price with exact count
