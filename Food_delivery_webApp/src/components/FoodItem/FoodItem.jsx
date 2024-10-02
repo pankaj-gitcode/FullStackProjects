@@ -13,8 +13,7 @@ export default function FoodItem(){
     const category = useRecoilValue(categoryAtom);
     const [categorisedFood, setCategorisedFood] = useState([])
     const [token,setToken] = useRecoilState(tokenAtom);
-    const [load, setLoad] = useState({});
-    
+        
     // console.log("API-FOODITEM: ",foodItemAPI)
     // foodItemAPI.data.forEach(elem=>console.log("WORKING: ",elem))
     // ------------- when +icon clicked ---------------
@@ -24,6 +23,8 @@ export default function FoodItem(){
         setCount({
             ...count,[itemId]:(count[itemId] || 0 )+ 1
         })
+
+        // if loggedIn/token is availabe then increment the itemId count via POST
         if(token){
             console.log("TOKEN+: ", token)
             await axios.post('http://localhost:3000/api/cart/add', {itemId}, {headers:{token}})
@@ -40,6 +41,8 @@ export default function FoodItem(){
                 ...count,[itemId]:Math.max((count[itemId] || 0 )-1,0)
             }
         )
+
+        // if loggedIn/token is availabe then decrement the itemId count via POST
         if(token){
             console.log("remove-: ", token)
             await axios.post('http://localhost:3000/api/cart/remove', {itemId}, {headers:{token}})
@@ -61,16 +64,17 @@ export default function FoodItem(){
     //  ------------ fetch cart data ----------
     const loadCartData = async(token)=>{
         try{
-
+            // with token avl. fetch the cart Item
             const response = await axios.get('http://localhost:3000/api/cart/get',{headers:{token}})
-                                               
+            // set the updated itemId count, if cartData is empty then set it to empty->{}                            
             setCount(response.data.data || {})
-            console.log("COUNT====>: ", response.data.data)
+            // console.log("COUNT====>: ", response.data.data)
         }
         catch(err){console.error(`ERROR---> ${err.response?err.response.data:err.message}`)}
     }
+    // itemId count should remain same even after page reloads/render
     useEffect(()=>{
-        console.log("REFRESHHED!!!!!!")
+        // asynchronus fetch cart data, invoke loadCartData() with updated token
         const fetchCartData = async()=>{
             if(localStorage.getItem('token')){
                 setToken(localStorage.getItem('token'))
@@ -79,9 +83,7 @@ export default function FoodItem(){
         }
         fetchCartData();
     }, [])
-    const countItem = ()=> count
-    console.log("countItem: ", countItem())
-   
+       
     return(<>
             
             {
