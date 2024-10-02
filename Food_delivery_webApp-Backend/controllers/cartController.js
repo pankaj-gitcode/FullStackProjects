@@ -68,7 +68,7 @@ const removeFromCart = async(req, res)=>{
 
 const getFromCart = async(req, res)=>{
    try{
-      const itemId = req.body.itemId;
+      // const itemId = req.body.itemId;
       const userId = req.body.userId;
 
       // find loggenIn user 
@@ -80,7 +80,7 @@ const getFromCart = async(req, res)=>{
       if(!cartData){ return res.status(404).json({success:false, data:"Cart is Empty"}) }
       await userModel.find({cartData})
       res.status(200).json({
-         success: false,
+         success: true,
          data: cartData
       })
    }

@@ -3,7 +3,7 @@ import jwt  from "jsonwebtoken"
 const userMiddleware = async(req, res, next)=>{
     try{
         // sign IN user token (.../api/user/login)
-        const {token} = req.headers;
+        const token = req.headers.token;
         if(!token){return res.status(404).json({success:false, data:"Not authorized to login!"})}
         // console.log("TOKEN: ",token)
 
