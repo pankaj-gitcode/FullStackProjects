@@ -14,8 +14,8 @@ const addToCart = async (req, res)=>{
       let cartData = await userData.cartData;
       
       // check if any entry in the CartData, add count if empty=>set to 1, if no=>increment to 1
-      if(!cartData[itemId]) { cartData[itemId] = 1; return;}
-      cartData[itemId] += 1;
+      if(!cartData[itemId]) { cartData[itemId] = 1}
+      else{cartData[itemId] += 1;}  
       // return (!cartData[itemId])? cartData[itemId] = 1: cartData[itemData] += 1;
 
       // get the particular user ID and update the cart data
@@ -45,7 +45,10 @@ const removeFromCart = async(req, res)=>{
       let cartData = await userData.cartData;
 
       // descrease the itemId count for non-empty cartData
-      if(cartData[itemId]>0) { cartData[itemId] -= 1; }
+      if(cartData[itemId]>0) { 
+         cartData[itemId] -= 1; 
+         if(cartData[itemId] === 0){delete cartData[itemId]} // if item id has no count then delete that id
+      }
 
       // update the DB finding the userId and update the cartData
       await userModel.findByIdAndUpdate(userId, {cartData});
