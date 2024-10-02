@@ -12,7 +12,7 @@ export default function LoginPopup(){
     const [token, setToken] = useRecoilState(tokenAtom);
     
 
-    // handle input values
+    // handle input elements values
     const dataHandler = (event)=>{
         // grab the input data from the user
         const name = event.target.name;

@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useResetRecoilState } from "recoil";
 import {
   countItemsAtom,
   foodItemsAPIAtom,
   foodItemsAtom,
+  tokenAtom,
   totalCartPriceAtom,
 } from "../../atom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Cart() {
   // const foodItem = useRecoilValue(foodItemsAtom());
@@ -15,14 +17,18 @@ export default function Cart() {
   const [countItems, setCountItems] = useRecoilState(countItemsAtom);
   const [totalCartPrice, setTotalCartPrice] =
     useRecoilState(totalCartPriceAtom);
+    const [token, setToken] = useRecoilState(tokenAtom);
 
   const navigateTo = useNavigate();
 
   // ------- ITEMS ADDED/REMOVED ---------
   console.log("cont: ", countItems);
-  const clickHandleAdd = (id) => {
+
+  const clickHandleAdd = async(itemId) => {
+    
     setCountItems((prevCount) => {
-      const currentCount = { ...prevCount, [id]: (prevCount[id] || 0) + 1 };
+      const currentCount = { ...prevCount, [itemId]: (prevCount[itemId] || 0) + 1 };
+
       return currentCount;
     });
   };

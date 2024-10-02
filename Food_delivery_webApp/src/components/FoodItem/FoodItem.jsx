@@ -1,7 +1,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { addRemoveIconsAtom,  categoryAtom,  countItemsAtom,  foodItemsAPIAtom,  foodItemsAtom , ratingsAtom } from '../atom';
+import { addRemoveIconsAtom,  categoryAtom,  countItemsAtom,  foodItemsAPIAtom,  foodItemsAtom , ratingsAtom, tokenAtom } from '../atom';
+import axios from 'axios';
 
 export default function FoodItem(){
     const foodItem = useRecoilValue(foodItemsAtom());
@@ -11,30 +12,45 @@ export default function FoodItem(){
     const addRemoveIcons = useRecoilValue(addRemoveIconsAtom);
     const category = useRecoilValue(categoryAtom);
     const [categorisedFood, setCategorisedFood] = useState([])
+    const [token,setToken] = useRecoilState(tokenAtom);
+    const [load, setLoad] = useState({});
     
-    console.log("API-FOODITEM: ",foodItemAPI)
-    foodItemAPI.data.forEach(elem=>console.log("WORKING: ",elem))
+    // console.log("API-FOODITEM: ",foodItemAPI)
+    // foodItemAPI.data.forEach(elem=>console.log("WORKING: ",elem))
     // ------------- when +icon clicked ---------------
   
-    const clickHandleAdd = (id)=>{
+    const clickHandleAdd = async(itemId)=>{
+        console.log("TOKEN+: ", token)
         setCount({
-            ...count,[id]:(count[id] || 0 )+ 1
+            ...count,[itemId]:(count[itemId] || 0 )+ 1
         })
-        // console.log("count[id]: ", count[id], id, count);
+        if(token){
+            console.log("TOKEN+: ", token)
+            await axios.post('http://localhost:3000/api/cart/add', {itemId}, {headers:{token}})
+             
+        }
+       
     }
     // ------------- when -icon clicked ---------------
-    const clickHandleSub = (id)=>{
+    const clickHandleSub = async(itemId)=>{
+        console.log("remove-ve: ", token)
         setCount(
             {
                 //spread the previous count Object
-                ...count,[id]:Math.max((count[id] || 0 )-1,0)
+                ...count,[itemId]:Math.max((count[itemId] || 0 )-1,0)
             }
         )
+        if(token){
+            console.log("remove-: ", token)
+            await axios.post('http://localhost:3000/api/cart/remove', {itemId}, {headers:{token}})
+            
+        }
     }
 
     // console.log("NEW-TYPE: ",category);
     // console.log(count)
 
+    // display the food list
     useEffect(()=>{
         if(category === 'All'){setCategorisedFood(foodItemAPI.data)}
         else{
@@ -42,11 +58,32 @@ export default function FoodItem(){
         }
     }, [category])
 
+    //  ------------ fetch cart data ----------
+    const loadCartData = async(token)=>{
+        try{
+
+            const response = await axios.get('http://localhost:3000/api/cart/get',{headers:{token}})
+                                               
+            setCount(response.data.data || {})
+            console.log("COUNT====>: ", response.data.data)
+        }
+        catch(err){console.error(`ERROR---> ${err.response?err.response.data:err.message}`)}
+    }
+    useEffect(()=>{
+        console.log("REFRESHHED!!!!!!")
+        const fetchCartData = async()=>{
+            if(localStorage.getItem('token')){
+                setToken(localStorage.getItem('token'))
+                 await loadCartData(localStorage.getItem('token'))
+            }
+        }
+        fetchCartData();
+    }, [])
     const countItem = ()=> count
     console.log("countItem: ", countItem())
    
     return(<>
-        
+            
             {
                 categorisedFood.map((elem,index)=>{
                     return(
@@ -110,6 +147,7 @@ export default function FoodItem(){
                 })
                 
             }
+            
     </>)
 }
 
