@@ -71,7 +71,7 @@ export default function Navbar(){
                         onClick={()=>setLogin(true)}
                         >SignIn</button>
                         :
-                        <div id='assetImage' className=' bg-red-500' >
+                        <div id='assetImage'>
                                         {/* ---------- PROFILE ICON -------- */}
                             <img src={assets.profile_icon} alt="profileIcon"  className='cursor-pointer' />
                             <ul id='logout' className='w-fit lg:w-[8vw] rounded-sm shadow-[2px_2px_5px_2px_rgba(0,0,0,0.5)] bg-[#fff]' >

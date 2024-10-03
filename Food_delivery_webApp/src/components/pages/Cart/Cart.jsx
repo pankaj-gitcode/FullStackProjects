@@ -31,16 +31,19 @@ export default function Cart() {
       
       return currentCount;
     });
+    // once signedIn, add the itemId count to DB
     if(token){
       await axios.post('http://localhost:3000/api/cart/add', {itemId}, {headers:{token}})
     }
   };
+  
   const clickHandleSub = async(itemId) => {
     setCountItems((prevCount) => {
       const newCount = { ...prevCount, [itemId]: Math.max(prevCount[itemId] - 1, 0) };
       // delete newCount[itemId];
       return newCount;
     });
+    // once signedIn, decrement the itemId count to DB
     if(token){
       await axios.post('http://localhost:3000/api/cart/remove', {itemId}, {headers:{token}})
     }
