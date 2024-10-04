@@ -5,6 +5,7 @@ import foodRequester from './routes/foodRoute.js';
 import userRouter from './routes/userRoute.js';
 import "dotenv/config"
 import cartRouter from './routes/cartRoute.js';
+import orderRouter from './routes/orderRoute.js';
 
 const app = express();
 
@@ -29,6 +30,9 @@ app.use('/api/user', userRouter);
 
 // cart router
 app.use('/api/cart', cartRouter);
+
+// order router
+app.use('/api/place', orderRouter);
 
 // just to check - not needed!
 app.get('/', (req,res)=>{
