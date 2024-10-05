@@ -12,8 +12,6 @@ const userMiddleware = async(req, res, next)=>{
         req.body.userId = decode.id;
 
         // console.log("DECODER: ", decode)
-
-        
         // console.log(`AUTH: ${[token, req.body.userId]}`)
         next();
     }
