@@ -74,7 +74,7 @@ export default function FoodItem(){
     }
     // itemId count should remain same even after page reloads/render
     useEffect(()=>{
-        // asynchronus fetch cart data, invoke loadCartData() with updated token
+        // fetch cart data, invoke loadCartData() with updated token
         const fetchCartData = async()=>{
             if(localStorage.getItem('token')){
                 setToken(localStorage.getItem('token'))
