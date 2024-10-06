@@ -16,8 +16,8 @@ export default function FoodItem(){
         
     // console.log("API-FOODITEM: ",foodItemAPI)
     // foodItemAPI.data.forEach(elem=>console.log("WORKING: ",elem))
+
     // ------------- when +icon clicked ---------------
-  
     const clickHandleAdd = async(itemId)=>{
         console.log("TOKEN+: ", token)
         setCount({
