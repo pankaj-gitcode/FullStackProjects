@@ -8,6 +8,7 @@ const URL = 'http://localhost:5173';
 // create place order function having payment gateway link
 const placeOrder = async(req, res)=>{
     try{
+        console.log("isArray: ", req.body.items)
         // create DB
         const newOrder = await orderModel.create({
             userId: req.body.userId,
@@ -20,25 +21,26 @@ const placeOrder = async(req, res)=>{
         await userModel.findByIdAndUpdate(req.body.userId, {cartData:{}});
 
         //create a line_items [as per Stripe official docs]
-        const line_items = req.body.items.map(item=>{
-            line_items:[{
+        const line_items = req.body.items.map(item=>({
+            
                 price_data:{
                     currency: 'inr',
                     product_data: {name:item.name},
-                    unit_amount: item.price*80
+                    unit_amount: item.price*100*80
                 },
                 quantity: item.quantity
-            }]
-        })
+            
+        }))
 
         // add delivery charges after each items
         line_items.push({
-            line_items:[{
+            
                 price_data:{
-                    product_data:{name:'Delivery charges'},
-                    unit_amount: 2*80
+                    currency: 'inr',
+                    product_data:{name:'Delivery Charges'},
+                    unit_amount: 2*100*80
                 }, quantity:1
-            }]
+            
         })
 
         // create Stripe payment chekout session
