@@ -22,7 +22,7 @@ export default function Cart() {
   const navigateTo = useNavigate();
 
   // ------- ITEMS ADDED/REMOVED ---------
-  console.log("cont: ", countItems);
+  // console.log("items in the cart with count as value: ", countItems);
 
   const clickHandleAdd = async(itemId) => {
     
@@ -55,7 +55,7 @@ export default function Cart() {
     setTotalCartPrice(priceArray.reduce((accum, elem) => accum + elem, 0));
   }, [priceArray]);
 
-  console.log("PriceArray: ", priceArray, "totalCartAtom: ", totalCartPrice);
+  console.log("Cart Items TotalPrice: ", priceArray, "totalCartAtom: ", totalCartPrice);
 
   return (
     <>

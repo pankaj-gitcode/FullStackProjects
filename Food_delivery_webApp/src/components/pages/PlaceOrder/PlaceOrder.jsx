@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { cartItemsAtom, foodItemsAPIAtom, foodItemsAtom, tokenAtom, totalCartPriceAtom } from "../../atom";
+import { cartItemsAtom, countItemsAtom, foodItemsAPIAtom, foodItemsAtom, tokenAtom, totalCartPriceAtom } from "../../atom";
 import axios from "axios";
 
 export default function PlaceOrder() {
     const subtotal = useRecoilValue(totalCartPriceAtom);
     const token = useRecoilValue(tokenAtom);
-    const cartItems = useRecoilValue(cartItemsAtom());
+    // const cartItems = useRecoilValue(cartItemsAtom());
+    const cartItems = useRecoilValue(countItemsAtom);
     const foodItems = useRecoilValue(foodItemsAPIAtom());
+    // const foodItems = useRecoilValue(foodItemsAtom());
     const [data, setData] = useState({
       firstName:'', lastName:'', email:'', street:'', city:'',
       state:'', zipCode:'', country:'', phone:''
     })
+
+    console.log(typeof subtotal)
    
     //input handler
     const inputHandler = (e)=>{
@@ -23,46 +27,49 @@ export default function PlaceOrder() {
       }))
     }
     console.log("CARTITEMS: ", cartItems)
+    // console.log("FOODITEMS: ", foodItems)
+    
+
     // collect all the orderItems info & fetch the API 
     const placeOrder = async(e)=>{
+      // prevent from default reload
+      e.preventDefault();
       try{
-        // prevent from reload
-        e.preventDefault();
 
-        // store all food items from the cart
+        // store the cart foodItems
         let orderItems = [];
 
-        // for all non-empty cart, grab the foodItems
-        foodItems.map((item) => {
+        // grab each items from the list foodItems from the foodList 
+        foodItems.data.map(item=>{
+          // console.log('foo: ', item)
+          // console.log('fooCRTITEM: ', cartItems)
+          
+          if(cartItems[item._id]>0){
+            // console.log('HEEELLLOOOOO', cartItems[item._id])
 
-          if (cartItems[item._id] > 0) {
-            console.log("ITEM-INFO: ", item);
-            const itemInfo = item;
-            // add new key quantity to orderItems
-            itemInfo["quantity"] = cartItems[item._id];
+            // can't add directly 'quantity' as key to item/itemInfo because itemInfo is freezed/sealed, use spread operator to add new quantity
+            let itemInfo = {...item,quantity:cartItems[item._id]}
             orderItems.push(itemInfo);
           }
-        });
 
-        // address, cart foodItems and total amount+delivery fee
-        const orderData = {
+        })
+        // append address, items & total cart price + delivery charges
+        let orderData = {
           address: data,
           items: orderItems,
-          amount: totalCartPriceAtom + 2,
-        };
-        // fetch the place order API and post the above orderData info
-        const response = await axios.post(
-          "http:localhost:3000/api/place/order",
-          orderData,
-          { headers: { token } }
-        );
-        // assign to new stripe payment gateway URL fetched from the response API
-        if (response.data) {
-          const { session_url } = response.data;
-          window.location.assign(session_url);
-        } else {
-          alert("ERROR!!");
+          amount: subtotal
         }
+        console.log("ORDERDATA: ", orderData)
+        // fetch the place order API
+        const response = await axios.post('http://localhost:3000/api/place/order', orderData, {headers:{token}})
+        console.log([response.data, response])
+        if(response.data){
+          console.log("response.data: ", response.data)
+          const {session_url} = response.data;
+          window.location.assign(session_url);
+        }
+        else{alert('ERROR')}
+
       }
       catch(err){
         console.error("ERROR-PLACEORDER: ", err.message)
@@ -72,11 +79,13 @@ export default function PlaceOrder() {
 
   return (
     <>
+    <form onSubmit={placeOrder}>
       <div className="grid grid-rows-1 lg:grid-cols-2 gap-20 lg:gap-32 my-20">
         {/* ---------- LEFT: Delivery Info ------------ */}
         <div className="">
           <h1 className="font-bold py-6 text-xl">Delivery Information</h1>
-          <form onSubmit={placeOrder} className="grid grid-rows-1-1 lg:grid-cols-2 gap-2">
+
+          <div  className="grid grid-rows-1-1 lg:grid-cols-2 gap-2">
             <input
               type="text"
               name='firstName'
@@ -154,7 +163,7 @@ export default function PlaceOrder() {
               placeholder="Phone"
               className="border-[1px] border-slate-300 rounded-sm pl-2 py-2 text-sm focus:outline-none border-double col-span-2"
             />
-          </form>
+          </div>
         </div>
 
         {/* ------------ RIGHT: Cart Totals ----------- */}
@@ -176,6 +185,7 @@ export default function PlaceOrder() {
             <p className="text-slate-500">$2</p>
             <p className="font-bold">Total</p>
             <p className="font-bold">${subtotal ? subtotal + 2 : 0}</p>
+
             {/* ---------------- button to payment ------------- */}
             <button type='submit' className="bg-orange-600 text-[#fff] rounded-sm py-1 mt-6 active:scale-105 duration-300 ease-in-out">
               PROCEED TO PAYMENT
@@ -183,6 +193,7 @@ export default function PlaceOrder() {
           </div>
         </div>
       </div>
+    </form>
     </>
   );
 }

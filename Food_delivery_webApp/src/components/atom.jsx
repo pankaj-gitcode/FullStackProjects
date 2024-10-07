@@ -84,7 +84,7 @@ export const addRemoveIconsAtom = atom({
     key: 'addRemoveIconsAtom',
     default: assets
 }) 
-// --------- items stored in countItems ex: {itemID:itemCount} ---------
+// ---------🛒 items stored in 👉CART🛒 with key as itemId & value as itemCount ex: {itemID:itemCount} ---------
 export const countItemsAtom = atom({
     key: 'countItemsAtom',
     default: {}
