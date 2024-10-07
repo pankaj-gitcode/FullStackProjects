@@ -1,5 +1,6 @@
 import Stripe from "stripe";
-import userModel from "../models/userModel"
+import userModel from "../models/userModel.js"
+import orderModel from "../models/orderModel.js";
 
 const stripe = Stripe(process.env.SECRET_KEY);
 const URL = 'http://localhost:5173';
@@ -8,15 +9,15 @@ const URL = 'http://localhost:5173';
 const placeOrder = async(req, res)=>{
     try{
         // create DB
-        const newOrder = await userModel.create({
+        const newOrder = await orderModel.create({
             userId: req.body.userId,
-            itemId: req.body.itemId,
             address: req.body.address,
+            items: req.body.items,
             amount: req.body.amount
         })
 
         // clean the cart 
-        await userModel.findByIdAndUpdate(req.nody.userId, {cartData:{}});
+        await userModel.findByIdAndUpdate(req.body.userId, {cartData:{}});
 
         //create a line_items [as per Stripe official docs]
         const line_items = req.body.items.map(item=>{
@@ -44,7 +45,7 @@ const placeOrder = async(req, res)=>{
         const session = await stripe.checkout.sessions.create({
             line_items,
             mode:'payment',
-            succes_url: `${URL}/verify?success=true&orderId=${newOrder._id}`,
+            success_url: `${URL}/verify?success=true&orderId=${newOrder._id}`,
             cancel_url: `${URL}/verify?sucess=false&orderId=${newOrder._id}`
         })
 
