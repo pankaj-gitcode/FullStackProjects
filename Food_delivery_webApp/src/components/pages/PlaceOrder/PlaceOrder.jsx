@@ -53,6 +53,7 @@ export default function PlaceOrder() {
           }
 
         })
+        console.log("ORDER_ITEMS: ",orderItems);
         // append address, items & total cart price + delivery charges
         let orderData = {
           address: data,
