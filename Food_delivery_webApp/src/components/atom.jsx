@@ -90,9 +90,9 @@ export const countItemsAtom = atom({
     default: {}
 })
 // ------------ cart Items ------------
-export const cartItemsAtom = atomFamily({
-    key: 'cartitemsAtom',
-    default: ()=>Array.from(countItemsAtom).map(elem=>elem)
+export const cartItemsAtom = selectorFamily({
+    key: 'cartItemsAtom',
+    get: ()=>({get})=>Array.from(countItemsAtom).map(elem=>elem)
 })
 
 

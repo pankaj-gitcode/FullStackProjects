@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { cartItemsAtom, foodItemsAPIAtom, foodItemsAtom, tokenAtom, totalCartPriceAtom } from "../../atom";
 import axios from "axios";
 
 export default function PlaceOrder() {
     const subtotal = useRecoilValue(totalCartPriceAtom);
     const token = useRecoilValue(tokenAtom);
-    const cartItems = useRecoilValue(cartItemsAtom);
-    const foodItems = useRecoilValue(foodItemsAPIAtom);
+    const cartItems = useRecoilValue(cartItemsAtom());
+    const foodItems = useRecoilValue(foodItemsAPIAtom());
     const [data, setData] = useState({
       firstName:'', lastName:'', email:'', street:'', city:'',
       state:'', zipCode:'', country:'', phone:''
@@ -22,29 +22,52 @@ export default function PlaceOrder() {
         ...data,[name]:value
       }))
     }
-
-    // fetch the API 
+    console.log("CARTITEMS: ", cartItems)
+    // collect all the orderItems info & fetch the API 
     const placeOrder = async(e)=>{
-      // prevent from reload
-      e.preventDefault();
+      try{
+        // prevent from reload
+        e.preventDefault();
 
-      // for all non-empty cart, grab the foodItems
-      foodItems.map(item=>{
-        if(cartItems[item._id]>0){
-          // TODO : impliment itemInfi and quantity
-          return;
+        // store all food items from the cart
+        let orderItems = [];
+
+        // for all non-empty cart, grab the foodItems
+        foodItems.map((item) => {
+
+          if (cartItems[item._id] > 0) {
+            console.log("ITEM-INFO: ", item);
+            const itemInfo = item;
+            // add new key quantity to orderItems
+            itemInfo["quantity"] = cartItems[item._id];
+            orderItems.push(itemInfo);
+          }
+        });
+
+        // address, cart foodItems and total amount+delivery fee
+        const orderData = {
+          address: data,
+          items: orderItems,
+          amount: totalCartPriceAtom + 2,
+        };
+        // fetch the place order API and post the above orderData info
+        const response = await axios.post(
+          "http:localhost:3000/api/place/order",
+          orderData,
+          { headers: { token } }
+        );
+        // assign to new stripe payment gateway URL fetched from the response API
+        if (response.data) {
+          const { session_url } = response.data;
+          window.location.assign(session_url);
+        } else {
+          alert("ERROR!!");
         }
-      })
-
-
-      const orderData = {
-          address:data,
-          items:'',
-          amount: totalCartPriceAtom+2
       }
-
-      const response = await axios.post('http:localhost:3000/api/place/order', orderData, {headers:{token}})
-
+      catch(err){
+        console.error("ERROR-PLACEORDER: ", err.message)
+      }
+      
     }
 
   return (
